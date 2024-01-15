@@ -10,21 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.cornerfinder.databinding.FragmentSlideshowBinding;
+import com.example.cornerfinder.databinding.FragmentHotspotsBinding;
 
 public class HotspotsFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentHotspotsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HotspotsViewModel slideshowViewModel =
                 new ViewModelProvider(this).get(HotspotsViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentHotspotsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
+        final TextView textView = binding.textHotspots;
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
