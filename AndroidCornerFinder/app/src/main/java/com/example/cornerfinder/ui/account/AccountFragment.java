@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cornerfinder.databinding.FragmentAccountBinding;
-import com.example.cornerfinder.ui.account.AccountViewModel;
 
 public class AccountFragment extends Fragment {
 
