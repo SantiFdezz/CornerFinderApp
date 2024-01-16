@@ -13,32 +13,30 @@
 
         <item android:title="">
                 <menu>
-                        <group android:checkableBehavior="single">
-                                <item
-                                    android:id="@+id/nav_home"
-                                    android:icon="@drawable/hotspots"
-                                    android:title="HotSpots" />
-                                <item
-                                    android:id="@+id/nav_gallery"
-                                    android:icon="@drawable/recomendadosparati"
-                                    android:title="Recomendado para ti" />
-                                <item
-                                    android:id="@+id/nav_lugaresguardados"
-                                    android:icon="@drawable/lugaresguardados"
-                                    android:title="Lugares guardados" />
-                                <item
-                                    android:id="@+id/nav_slideshow"
-                                    android:icon="@drawable/modoverano"
-                                    android:title="Modo Verano" />
-                                <item
-                                    android:id="@+id/nav_routes"
-                                    android:icon="@drawable/rutas"
-                                    android:title="Rutas" />
-                                <item
-                                    android:id="@+id/nav_generalmap"
-                                    android:icon="@drawable/mapageneral"
-                                    android:title="Mapa General" />
-                        </group>
+                        <item
+                            android:id="@+id/nav_home"
+                            android:icon="@drawable/hotspots"
+                            android:title="HotSpots" />
+                        <item
+                            android:id="@+id/nav_gallery"
+                            android:icon="@drawable/recomendadosparati"
+                            android:title="Recomendado para ti" />
+                        <item
+                            android:id="@+id/nav_lugaresguardados"
+                            android:icon="@drawable/lugaresguardados"
+                            android:title="Lugares guardados" />
+                        <item
+                            android:id="@+id/nav_slideshow"
+                            android:icon="@drawable/modoverano"
+                            android:title="Modo Verano" />
+                        <item
+                            android:id="@+id/nav_routes"
+                            android:icon="@drawable/rutas"
+                            android:title="Rutas" />
+                        <item
+                            android:id="@+id/nav_generalmap"
+                            android:icon="@drawable/mapageneral"
+                            android:title="Mapa General" />
                 </menu>
         </item>
 
@@ -62,16 +60,12 @@
             android:icon="@drawable/ajustescuenta"
             android:title="Ajustes de cuenta" />
 
-        <item android:title="">
-                <menu>
-                        <group android:checkableBehavior="single">
-                                <item
-                                    android:id="@+id/nav_closesession"
-                                    android:icon="@drawable/cerrarsesion"
-                                    android:title="Cerrar sesión" />
-                        </group>
-                </menu>
-        </item>
+        <item android:title="" />
+
+        <item
+            android:id="@+id/nav_closesession"
+            android:icon="@drawable/cerrarsesion"
+            android:title="Cerrar sesión" />
 
 
 
