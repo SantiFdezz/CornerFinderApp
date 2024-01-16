@@ -1,6 +1,13 @@
     package com.example.cornerfinder;
 
+    import android.graphics.Color;
+    import android.graphics.PorterDuff;
+    import android.graphics.PorterDuffColorFilter;
+    import android.graphics.drawable.Drawable;
     import android.os.Bundle;
+    import android.text.SpannableString;
+    import android.text.style.ForegroundColorSpan;
+    import android.view.MenuItem;
     import android.view.View;
     import android.view.Menu;
 
@@ -36,10 +43,28 @@
                             .setAction("Action", null).show();
                 }
             });
+
             DrawerLayout drawer = binding.drawerLayout;
-            NavigationView navigationView = binding.navView;
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
+
+            // Obtenemos el navigation view y lo guardamos en una variable.
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            // Guardamos el menu del navigation view en una variable.
+            Menu menu = navigationView.getMenu();
+            // Guardamos el item del cual queremos cambiar el color.
+            MenuItem menuItem = menu.findItem(R.id.nav_closesession);
+            // Guardamos el texto del item en un spannable, que permite estilizarlo.
+            SpannableString s = new SpannableString(menuItem.getTitle());
+            s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);
+            menuItem.setTitle(s);
+
+            // Guardamos el icono del item en una variable drawable.
+            Drawable icon = menuItem.getIcon();
+            if (icon != null) {
+                // Mientras que el icono exista, se cambiará su filtro de color a rojo.
+                icon.setColorFilter(new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN));
+                menuItem.setIcon(icon);
+            }
+
             mAppBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                     .setOpenableLayout(drawer)
