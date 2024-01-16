@@ -23,8 +23,4 @@
 
     <style name="Theme.CornerFinder.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ThemeOverlay.ItemGroup" parent="">
-        <item name="android:textColorSecondary">@color/red</item>
-    </style>
-
 </resources>
