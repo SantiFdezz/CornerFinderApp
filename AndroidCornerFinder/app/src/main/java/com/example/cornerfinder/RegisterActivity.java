@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                String password2 = password2EditText.getText().toString()
+                String password2 = password2EditText.getText().toString();
                 String email = emailEditText.getText().toString();
                 String birthdate = birthdateEditText.getText().toString();
                  if (validateRegister(username,password,password2,email,birthdate)){
