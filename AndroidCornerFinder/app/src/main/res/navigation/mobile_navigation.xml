@@ -10,4 +10,5 @@
         android:name="com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment"
         android:label="@string/menu_edit_preferences"
         tools:layout="@layout/fragment_edit_preferences" />
+
 </navigation>

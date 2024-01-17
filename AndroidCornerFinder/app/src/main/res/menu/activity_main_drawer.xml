@@ -3,18 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_hotspots"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_hotspots" />
+        <item android:title="">
+                <menu>
+                        <group android:checkableBehavior="single">
+
+                        </group>
+                </menu>
+        </item>
+
+        <item android:title="">
+                <menu>
+                        <item
+                            android:id="@+id/nav_hotspots"
+                            android:icon="@drawable/hotspots"
+                            android:title="@string/menu_hotspots" />
+                        <item
+                            android:id="@+id/nav_gallery"
+                            android:icon="@drawable/recomendadosparati"
+                            android:title="Recomendado para ti" />
+                        <item
+                            android:id="@+id/nav_lugaresguardados"
+                            android:icon="@drawable/lugaresguardados"
+                            android:title="Lugares guardados" />
+                        <item
+                            android:id="@+id/nav_slideshow"
+                            android:icon="@drawable/modoverano"
+                            android:title="Modo Verano" />
+                        <item
+                            android:id="@+id/nav_routes"
+                            android:icon="@drawable/rutas"
+                            android:title="Rutas" />
+                        <item
+                            android:id="@+id/nav_generalmap"
+                            android:icon="@drawable/mapageneral"
+                            android:title="Mapa General" />
+                </menu>
+        </item>
+
+        <item android:title="">
+                <menu>
+                        <group android:checkableBehavior="single">
+                        </group>
+                </menu>
+        </item>
+
         <item
             android:id="@+id/nav_account"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/cuenta"
             android:title="@string/menu_account" />
         <item
             android:id="@+id/nav_edit_preferences"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/editarpreferencias"
             android:title="@string/menu_edit_preferences" />
-    </group>
+
+        <item
+            android:id="@+id/nav_accountsettings"
+            android:icon="@drawable/ajustescuenta"
+            android:title="Ajustes de cuenta" />
+
+        <item android:title="" />
+
+        <item
+            android:id="@+id/nav_closesession"
+            android:icon="@drawable/cerrarsesion"
+            android:title="Cerrar sesión" />
 </menu>

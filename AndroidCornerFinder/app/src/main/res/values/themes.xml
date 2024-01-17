@@ -22,4 +22,5 @@
     <style name="Theme.CornerFinder.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.CornerFinder.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
