@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.account.AccountFragment">
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ImageView.Circle"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        android:background="@color/default_grey"/>
+
     <TextView
         android:id="@+id/text_account"
         android:layout_width="match_parent"
@@ -13,14 +25,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="17sp"
         android:text="Username"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/text_email"
+        android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/profile_picture" />
+
     <TextView
         android:id="@+id/text_email"
         android:layout_width="match_parent"
@@ -29,9 +41,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="12sp"
+        android:textSize="17sp"
         android:text="Correo"
-        app:layout_constraintBottom_toTopOf="@id/text_added_locations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_account" />
@@ -40,12 +51,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:text="Ubicaciones añadidas"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_email" />
