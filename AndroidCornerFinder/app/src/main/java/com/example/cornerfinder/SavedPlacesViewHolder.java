@@ -11,12 +11,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class PlacesViewHolder extends RecyclerView.ViewHolder {
+public class SavedPlacesViewHolder extends RecyclerView.ViewHolder {
     private final TextView textView1;
     private final TextView textView2;
     private final ImageView imageView;
 
-    public PlacesViewHolder(@NonNull View itemView, List<PlacesData> allTheData) {
+    public SavedPlacesViewHolder(@NonNull View itemView, List<SavedPlacesData> allTheData) {
         super(itemView);
         textView1 = (TextView) itemView.findViewById(R.id.text_view1);
         textView2 = (TextView) itemView.findViewById(R.id.text_view2);
@@ -29,7 +29,7 @@ public class PlacesViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void showData(PlacesData data, Activity activity){
+    public void showData(SavedPlacesData data, Activity activity){
         // Mostrar los datos.
         textView1.setText(data.getName());
         Glide.with(itemView.getContext()) // Utilizar Glide para cargar la imagen desde la URL.

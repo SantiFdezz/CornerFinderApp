@@ -3,13 +3,13 @@ package com.example.cornerfinder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PlacesData {
+public class SavedPlacesData {
     private String name;
     private String imageUrl;
     private String description;
     private String preference;
 
-    public PlacesData(String name, String imageUrl, String description, String preference){
+    public SavedPlacesData(String name, String imageUrl, String description, String preference){
         this.name = name;
         this.imageUrl = imageUrl;
         this.description = description;
@@ -35,7 +35,7 @@ public class PlacesData {
     public String getDescription() { return description; }
 
     // Constructor para inicializar los datos desde un objeto JSONObject.
-    public PlacesData(JSONObject json){
+    public SavedPlacesData(JSONObject json){
         try{
             this.name=json.getString("name");
             this.imageUrl=json.getString("image_url");
