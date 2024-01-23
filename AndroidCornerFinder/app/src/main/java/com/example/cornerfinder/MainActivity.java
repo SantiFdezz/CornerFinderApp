@@ -64,7 +64,6 @@
                     this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawerLayout.addDrawerListener(toggle);
             toggle.syncState();
-
             NavigationView navigationView = findViewById(R.id.nav_view);
             //creamos el elemento que escuchara en cual boton clickamos de nuestro menú
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -72,14 +71,13 @@
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     // menu que lleva a sus actividades
                     Fragment fragment = null;
-                    if (item.getItemId() == R.id.nav_home) {
-                        // Navega a al fragment1 .. Carlos ponme un 70
+                    if (item.getItemId() == R.id.nav_hotspots) {
+                        //fragment = new ();
+                    }else if(item.getItemId() == R.id.nav_recommended){
                         fragment = new RecommendedFragment();
-                    }else if(item.getItemId() == R.id.nav_gallery){
-                        fragment = new AddlocationFragment();
                     }else if(item.getItemId() == R.id.nav_lugaresguardados){
                         fragment = new AddlocationFragment();
-                    }else if(item.getItemId() == R.id.nav_slideshow){
+                    }else if(item.getItemId() == R.id.nav_summermode){
                         fragment = new AddlocationFragment();
                     }else if(item.getItemId() == R.id.nav_generalmap){
                         //fragment = new MapsFR();

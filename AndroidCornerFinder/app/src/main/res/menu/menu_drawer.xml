@@ -14,11 +14,11 @@
         <item android:title="">
                 <menu>
                         <item
-                            android:id="@+id/nav_home"
+                            android:id="@+id/nav_hotspots"
                             android:icon="@drawable/hotspots"
-                            android:title="HotSpots" />
+                            android:title="@string/menu_hotspots" />
                         <item
-                            android:id="@+id/nav_gallery"
+                            android:id="@+id/nav_recommended"
                             android:icon="@drawable/recomendadosparati"
                             android:title="Recomendado para ti" />
                         <item
@@ -26,7 +26,7 @@
                             android:icon="@drawable/lugaresguardados"
                             android:title="Lugares guardados" />
                         <item
-                            android:id="@+id/nav_slideshow"
+                            android:id="@+id/nav_summermode"
                             android:icon="@drawable/modoverano"
                             android:title="Modo Verano" />
                         <item
@@ -50,11 +50,12 @@
         <item
             android:id="@+id/nav_account"
             android:icon="@drawable/cuenta"
-            android:title="Cuenta" />
+            android:title="@string/menu_account" />
         <item
-            android:id="@+id/nav_preferences"
+            android:id="@+id/nav_edit_preferences"
             android:icon="@drawable/editarpreferencias"
-            android:title="Editar Preferencias" />
+            android:title="@string/menu_edit_preferences" />
+
         <item
             android:id="@+id/nav_accountsettings"
             android:icon="@drawable/ajustescuenta"
@@ -66,8 +67,4 @@
             android:id="@+id/nav_closesession"
             android:icon="@drawable/cerrarsesion"
             android:title="Cerrar sesión" />
-
-
-
-
 </menu>
