@@ -1,46 +1,47 @@
 package com.example.cornerfinder;
 
+import android.widget.Button;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SavedPlacesData {
     private String name;
-    private String imageUrl;
+    private String imageName;
     private String description;
-    private String preference;
+    private String tag;
+    private String imageNameHeart;
 
-    public SavedPlacesData(String name, String imageUrl, String description, String preference){
+    public SavedPlacesData(String name, String imageName, String description, String tag, String imageNameHeart){
         this.name = name;
-        this.imageUrl = imageUrl;
+        this.imageName = imageName;
         this.description = description;
-        this.preference = preference;
+        this.tag = tag;
+        this.imageNameHeart = imageNameHeart;
     }
 
     public String getName() {
         return name;
     }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public String description() {
-        return description;
-    }
-
-    public String preference(){
-        return preference;
-    }
-
     public String getDescription() { return description; }
+    public String getTag(){
+        return tag;
+    }
+    public String getImageName() {
+        return imageName;
+    }
+    public String getImageNameHeart() {
+        return imageNameHeart;
+    }
 
     // Constructor para inicializar los datos desde un objeto JSONObject.
     public SavedPlacesData(JSONObject json){
         try{
             this.name=json.getString("name");
-            this.imageUrl=json.getString("image_url");
+            this.imageName=json.getString("image_name");
             this.description=json.getString("description");
-            this.preference=json.getString("preference");
+            this.tag=json.getString("tag");
+            this.imageNameHeart=json.getString("image_name_heart");
         }catch(JSONException e){
             e.printStackTrace();
         }
