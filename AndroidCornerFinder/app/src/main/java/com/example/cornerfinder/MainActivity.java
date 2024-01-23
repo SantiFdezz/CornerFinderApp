@@ -1,5 +1,6 @@
     package com.example.cornerfinder;
 
+    import android.content.Context;
     import android.graphics.Color;
     import android.graphics.PorterDuff;
     import android.graphics.PorterDuffColorFilter;
@@ -14,6 +15,12 @@
     import com.google.android.material.snackbar.Snackbar;
     import com.google.android.material.navigation.NavigationView;
 
+    import androidx.activity.OnBackPressedCallback;
+    import androidx.annotation.NonNull;
+    import androidx.appcompat.app.ActionBarDrawerToggle;
+    import androidx.appcompat.widget.Toolbar;
+    import androidx.core.view.GravityCompat;
+    import androidx.fragment.app.Fragment;
     import androidx.navigation.NavController;
     import androidx.navigation.Navigation;
     import androidx.navigation.ui.AppBarConfiguration;
@@ -24,66 +31,66 @@
     import com.example.cornerfinder.databinding.ActivityMainBinding;
 
     public class MainActivity extends AppCompatActivity {
+        private Context context = this;
+        private DrawerLayout drawerLayout;
+        private Toolbar toolbar;
 
-        private AppBarConfiguration mAppBarConfiguration;
-        private ActivityMainBinding binding;
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState) {//inicializamos los atributos
             super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            drawerLayout = findViewById(R.id.drawer_layout);
+            toolbar = findViewById(R.id.toolbar);
 
-            binding = ActivityMainBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
-
-            setSupportActionBar(binding.appBarMain.toolbar);
-            binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
+            //creamos metodo que cierre el menu y no la app
+            getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                //metodo que cierra el menu si se pulsa atrás.
                 @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                public void handleOnBackPressed() {
+                    if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    }else{
+                        if (isEnabled()){
+                            setEnabled(false);
+                            MainActivity.super.onBackPressed();
+                        }
+                    }
                 }
             });
 
-            DrawerLayout drawer = binding.drawerLayout;
-
-            // Obtenemos el navigation view y lo guardamos en una variable.
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            // Guardamos el menu del navigation view en una variable.
-            Menu menu = navigationView.getMenu();
-            // Guardamos el item del cual queremos cambiar el color.
-            MenuItem menuItem = menu.findItem(R.id.nav_closesession);
-            // Guardamos el texto del item en un spannable, que permite estilizarlo.
-            SpannableString s = new SpannableString(menuItem.getTitle());
-            s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);
-            menuItem.setTitle(s);
-
-            // Guardamos el icono del item en una variable drawable.
-            Drawable icon = menuItem.getIcon();
-            if (icon != null) {
-                // Mientras que el icono exista, se cambiará su filtro de color a rojo.
-                icon.setColorFilter(new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN));
-                menuItem.setIcon(icon);
-            }
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_edit_preferences) // Add the rest here separated by commas
-                .setOpenableLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-    }
-
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
-        }
-
-        @Override
-        public boolean onSupportNavigateUp() {
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-            return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                    || super.onSupportNavigateUp();
+            setSupportActionBar(toolbar);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawerLayout.addDrawerListener(toggle);
+            toggle.syncState();
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            //creamos el elemento que escuchara en cual boton clickamos de nuestro menú
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    // menu que lleva a sus actividades
+                    Fragment fragment = null;
+                    if (item.getItemId() == R.id.nav_hotspots) {
+                        //fragment = new ();
+                    }else if(item.getItemId() == R.id.nav_recommended){
+                        fragment = new RecommendedFragment();
+                    }else if(item.getItemId() == R.id.nav_lugaresguardados){
+                        fragment = new AddlocationFragment();
+                    }else if(item.getItemId() == R.id.nav_summermode){
+                        fragment = new AddlocationFragment();
+                    }else if(item.getItemId() == R.id.nav_generalmap){
+                        //fragment = new MapsFR();
+                    }
+                    //si no llega ningun fragment
+                    if (fragment != null){
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    }
+                    // Cierra el Navigation Drawer después de la selección
+                    return false;
+                }
+            });
         }
     }
