@@ -105,7 +105,6 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
                 boolean isCheckBox4Checked = checkBox4.isChecked();
                 boolean isCheckBox5Checked = checkBox5.isChecked();
                 boolean isCheckBox6Checked = checkBox6.isChecked();
-
             }
         });
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
