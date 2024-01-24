@@ -5,9 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
-public class SavedPlacesActivity extends AppCompatActivity {
+public class SavedPlacesFragment extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SavedPlacesViewAdapter adapter;
 
@@ -18,7 +16,7 @@ public class SavedPlacesActivity extends AppCompatActivity {
 
         // Inicializar el RecyclerView y el adaptador
         recyclerView = findViewById(R.id.saved_places_recycler_view);
-        //adapter = new SavedPlacesViewAdapter(dataSet, this);
+        //adapter = new SavedPlacesViewAdapter(, this);
 
         // Configurar el RecyclerView con el adaptador
         recyclerView.setAdapter(adapter);
