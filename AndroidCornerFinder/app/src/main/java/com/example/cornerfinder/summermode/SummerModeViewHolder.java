@@ -36,12 +36,11 @@ public class SummerModeViewHolder extends RecyclerView.ViewHolder {
         etiqueta.setText(summerData.getEtiqueta());
         Util.downloadBitmapToImageView(summerData.getImage_url(), this.imageView);
 
-
-
         location.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Comprobar que funciona bien el botón locatin y obtiene los datos.
             public void onClick(View v) {
-                System.out.println("Funciona el botón");
+                System.out.println("Funciona el botón. Location: "+summerData.getLocation());
             }
         });
 
