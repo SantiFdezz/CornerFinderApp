@@ -19,7 +19,7 @@ public class SummerModeViewHolder extends RecyclerView.ViewHolder {
     private ImageView imageView;
     private Button location;
 
-
+    // Constructor que inicializa las vistas utilizando el diseño de celda:
     public SummerModeViewHolder(@NonNull View ivi){
         super(ivi);
         placeName = ivi.findViewById(R.id.placeName);
@@ -29,7 +29,7 @@ public class SummerModeViewHolder extends RecyclerView.ViewHolder {
         location = ivi.findViewById(R.id.location);
     }
 
-
+    // Método para mostrar los datos en las vistas correspondientes:
     public void showData(SummerModeData summerData){
         placeName.setText(summerData.getPlaceName());
         descripcion.setText(summerData.getDescripcion());
@@ -43,11 +43,5 @@ public class SummerModeViewHolder extends RecyclerView.ViewHolder {
                 System.out.println("Funciona el botón. Location: "+summerData.getLocation());
             }
         });
-
-
-
-
-
     }
-
 }
