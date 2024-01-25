@@ -17,17 +17,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button registerButton;
-    private Button loginButton;
-    private EditText textUsername;
-    private EditText textPassword;
+    private Button registerButton, loginButton;
+    private EditText textUsername, textPassword;
     private Context context = this;
-    private RequestQueue requestQueue;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         textUsername = findViewById(R.id.campo_usuario);
         textPassword = findViewById(R.id.campo_contraseña);
 
-        requestQueue = Volley.newRequestQueue(this);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,66 +46,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginUser();
-            }
-        });
+        loginButton.setOnClickListener(v -> loginUser());
     }
 
     private void loginUser() {
-        JSONObject requestBody = new JSONObject();
-
-        try {
-            requestBody.put("username", textUsername.getText().toString() );
-            requestBody.put("password", textPassword.getText().toString() );
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                Server.name + "/sessions",
-                requestBody,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        String receivedToken;
-
-                        try {
-                            receivedToken = response.getString("sessionToken");
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                        Toast.makeText(context, "Token " + receivedToken, Toast.LENGTH_SHORT).show();
+        String email = textUsername.getText().toString().trim();
+        String password = textPassword.getText().toString().trim();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
                         Intent intent = new Intent(context, MainActivity.class);
                         startActivity(intent);
-
-                        SharedPreferences preferences = context.getSharedPreferences("SESSIONS_APP_PREFS", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("VALID_USERNAME", textUsername.getText().toString());
-                        editor.putString("VALID_TOKEN", receivedToken);
-                        editor.commit();
                         finish();
+                    } else {
+                        Toast.makeText(context, "Authentication failed."+ task.getException().getMessage(),
+                                Toast.LENGTH_SHORT).show();
                     }
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error.networkResponse == null) {
-                            Toast.makeText(context, "No se pudo establecer la conexión", Toast.LENGTH_LONG).show();
-                        } else {
-                            int serverCode = error.networkResponse.statusCode;
-                            Toast.makeText(context, "Estado de respuesta: " + serverCode, Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }
-        );
-        this.requestQueue.add(request);
+                });
     }
+
 }
 
 
