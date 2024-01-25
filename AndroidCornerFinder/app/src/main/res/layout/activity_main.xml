@@ -33,5 +33,12 @@
             android:background="@android:color/white"
             app:menu="@menu/menu_drawer" />
 
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/recycler_view_summermode"/>
     </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>
