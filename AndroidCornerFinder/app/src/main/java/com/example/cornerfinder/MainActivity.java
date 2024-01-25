@@ -20,6 +20,7 @@
     import com.android.volley.VolleyError;
     import com.android.volley.toolbox.JsonArrayRequest;
     import com.android.volley.toolbox.Volley;
+    import com.example.cornerfinder.savedplaces.SavedPlacesFragment;
     import com.example.cornerfinder.summermode.SummerModeAdapter;
     import com.example.cornerfinder.summermode.SummerModeData;
     import com.google.android.material.snackbar.Snackbar;
@@ -101,6 +102,8 @@
                         fragment = new AddlocationFragment();
                     }else if(item.getItemId() == R.id.nav_summermode){
                         fragment = new AddlocationFragment();
+                    }else if(item.getItemId() == R.id.nav_lugaresguardados){
+                        fragment = new SavedPlacesFragment();
                     }else if(item.getItemId() == R.id.nav_generalmap){
                         //fragment = new MapsFR();
                     }
