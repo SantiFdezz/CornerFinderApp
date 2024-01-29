@@ -79,7 +79,7 @@
             android:layout_height="42dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/full_heart"
+            android:src="@drawable/empty_heart"
             app:layout_constraintEnd_toEndOf="@+id/text_view2"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/location"
