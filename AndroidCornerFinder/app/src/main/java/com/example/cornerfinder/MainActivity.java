@@ -34,10 +34,10 @@
                 //metodo que cierra el menu si se pulsa atrás.
                 @Override
                 public void handleOnBackPressed() {
-                    if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+                    if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                         drawerLayout.closeDrawer(GravityCompat.START);
-                    }else{
-                        if (isEnabled()){
+                    } else {
+                        if (isEnabled()) {
                             setEnabled(false);
                             MainActivity.super.onBackPressed();
                         }
@@ -59,7 +59,7 @@
                     Fragment fragment = null;
                     if (item.getItemId() == R.id.nav_hotspots) {
                         //fragment = new ();
-                    }else if(item.getItemId() == R.id.nav_recommended){
+                    } else if (item.getItemId() == R.id.nav_recommended) {
                         fragment = new RecommendedFragment();
                     } else if (item.getItemId() == R.id.nav_lugaresguardados) {
                         fragment = new AddlocationFragment();
@@ -69,7 +69,7 @@
                         //fragment = new MapsFR();
                     }
                     //si no llega ningun fragment
-                    if (fragment != null){
+                    if (fragment != null) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         return true;

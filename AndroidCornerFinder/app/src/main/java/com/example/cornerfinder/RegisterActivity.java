@@ -1,41 +1,37 @@
 package com.example.cornerfinder;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import org.json.JSONException;
-import org.json.JSONObject;
+import kotlinx.coroutines.scheduling.Task;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private EditText password2EditText;
-
-    private EditText emailEditText;
-    private EditText birthdateEditText;
-    private Button registerButton;
-    private RequestQueue requestQueue;
+    private EditText usernameEditText, passwordEditText, password2EditText, emailEditText, birthdateEditText;
     private Context context = this;
-    private Button registerPage;
-    private Button loginPage;
+    private FirebaseAuth mAuth;
+    private Button registerPage, loginPage, registerButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mAuth = FirebaseAuth.getInstance();
+
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         password2EditText = findViewById(R.id.password2);
@@ -44,20 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.register_button);
         registerPage = findViewById(R.id.register_page);
         loginPage = findViewById(R.id.login_page);
-        requestQueue = Volley.newRequestQueue(this);
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                String password2 = password2EditText.getText().toString();
-                String email = emailEditText.getText().toString();
-                String birthdate = birthdateEditText.getText().toString();
-                 if (validateRegister(username,password,password2,email,birthdate)){
-                     sendRegisterRequest(username, password, email, birthdate);
-                 }
-            }
-        });
+        registerButton.setOnClickListener(v -> registerUser());
         loginPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,14 +48,38 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        registerPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+    }
 
+    private void registerUser(){
+        String username = usernameEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String password2 = password2EditText.getText().toString().trim();
+        String email = emailEditText.getText().toString().trim();
+        String birthdate = birthdateEditText.getText().toString().trim();
+        if (validateRegister(username,password,password2,email,birthdate)){
+            mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, task-> {
+                        if (task.isSuccessful() ) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Usuario nuevoUser = new Usuario(username, email, birthdate);
+                            FirebaseDatabase.getInstance().getReference("usuarios")
+                                    .child(user.getUid())
+                                    .setValue(nuevoUser)
+                                    .addOnCompleteListener(taskDb -> {
+                                if (taskDb.isSuccessful()) {
+                                    Toast.makeText(context, "Registro Exitoso", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(context, "Error al guardar datos:"+taskDb.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Log.e("TagError", task.getException().getMessage());
+                            Toast.makeText(RegisterActivity.this, "Registro fallido"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
     private boolean validateRegister(String username, String password,String password2, String email, String birthdate){
         if (username.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty() ||birthdate.isEmpty()){
@@ -94,42 +101,14 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return true;
     }
-    private void sendRegisterRequest(String username, String password, String email, String birthdate) {
-        JSONObject requestBody = new JSONObject();
-        try {
-            requestBody.put("username", username);
-            requestBody.put("password", password);
-            requestBody.put("email", email);
-            requestBody.put("birthdate", birthdate);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
+    static class Usuario {
+        public String username, email, birthdate;
+
+        public Usuario(String username, String email, String birthdate) {
+            this.username = username;
+            this.email = email;
+            this.birthdate = birthdate;
         }
-
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                Server.name + "/user",
-                requestBody,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(context, "Usuario creado", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(context, LoginActivity.class);
-                        startActivity(intent);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error.networkResponse == null) {
-                            Toast.makeText(context, "No se pudo establecer la conexión", Toast.LENGTH_LONG).show();
-                        } else {
-                            int serverCode = error.networkResponse.statusCode;
-                            Toast.makeText(context, "Estado de respuesta: " + serverCode, Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-                }
-        );
-        this.requestQueue.add(request);
     }
+
 }
