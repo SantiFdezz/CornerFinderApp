@@ -1,16 +1,16 @@
-package com.example.cornerfinder.ui.hotspots;
+package com.example.cornerfinder.ui.editpreferences;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HotspotsViewModel extends ViewModel {
+public class EditPreferencesViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HotspotsViewModel() {
+    public EditPreferencesViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is hotspots fragment");
+        mText.setValue("Preferencias");
     }
 
     public LiveData<String> getText() {

@@ -16,13 +16,13 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/ic_menu_camera"
-        app:layout_constraintBottom_toBottomOf="@+id/text_view2"
+        app:layout_constraintBottom_toBottomOf="@+id/descripcion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.238" />
 
     <TextView
-        android:id="@+id/text_view1"
+        android:id="@+id/placeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre ubicación"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tag1"
+        android:id="@+id/etiqueta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="4dp"
@@ -43,44 +43,44 @@
         android:textSize="12sp"
         android:textColor="@color/black"
         android:background="@drawable/rounded_border"
-        app:layout_constraintTop_toBottomOf="@+id/text_view1"
-        app:layout_constraintStart_toStartOf="@+id/text_view1"
+        app:layout_constraintTop_toBottomOf="@+id/placeName"
+        app:layout_constraintStart_toStartOf="@+id/placeName"
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:id="@+id/text_view2"
+        android:id="@+id/descripcion"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginTop="10dp"
         android:text="Brevedescripciónbrevedescripciónbrevedescripciónbrevedescripciónbrevedescripción"
         android:textSize="15dp"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/icon"
+        app:layout_constraintEnd_toEndOf="@+id/heart"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/text_view1"
-        app:layout_constraintTop_toBottomOf="@+id/tag1" />
+        app:layout_constraintStart_toStartOf="@+id/placeName"
+        app:layout_constraintTop_toBottomOf="@+id/etiqueta" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/location"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:text="Ubicación"
         android:textSize="15dp"
         android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/text_view1"
+        app:layout_constraintEnd_toEndOf="@+id/placeName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/image_view"
         app:layout_constraintTop_toBottomOf="@+id/image_view" />
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/heart"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:src="@drawable/ic_empty_heart"
-        app:layout_constraintEnd_toEndOf="@+id/text_view2"
+        app:layout_constraintEnd_toEndOf="@+id/descripcion"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@id/location"
+        app:layout_constraintTop_toTopOf="@+id/location" />
 </androidx.constraintlayout.widget.ConstraintLayout>
