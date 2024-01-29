@@ -120,10 +120,9 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney, Australia, and move the camera.
+        
         LatLng sydney = new LatLng(43.362343,-8.411540);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in A Coruña"));
+        mMap.addMarker(new MarkerOptions().position(sydney).title("A Coruña"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
