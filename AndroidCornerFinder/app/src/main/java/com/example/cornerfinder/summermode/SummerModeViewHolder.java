@@ -2,6 +2,7 @@ package com.example.cornerfinder.summermode;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,7 +41,7 @@ public class SummerModeViewHolder extends RecyclerView.ViewHolder {
             @Override
             // Comprobar que funciona bien el botón locatin y obtiene los datos.
             public void onClick(View v) {
-                System.out.println("Funciona el botón. Location: "+summerData.getLocation());
+                Log.i("Funciona el botón. Location: ", summerData.getLocation());
             }
         });
     }
