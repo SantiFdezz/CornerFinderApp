@@ -12,8 +12,8 @@ android:layout_height="match_parent">
         android:layout_height="match_parent">
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:src="@drawable/cornerfinder"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/cornerfinder_label"
@@ -59,12 +59,13 @@ android:layout_height="match_parent">
         <EditText
             android:id="@+id/username"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:hint="john.doe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/username_label"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:inputType="textPersonName"/>
 
         <TextView
             android:id="@+id/password_label"
@@ -80,21 +81,23 @@ android:layout_height="match_parent">
         <EditText
             android:id="@+id/password"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:hint="Contraseña"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_label"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:inputType="textPassword"/>
         <EditText
             android:id="@+id/password2"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:hint="Repetir Contraseña"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:inputType="textPassword"/>
 
         <TextView
             android:id="@+id/email_label"
@@ -111,12 +114,13 @@ android:layout_height="match_parent">
         <EditText
             android:id="@+id/email"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:hint="john.doe@gmail.com"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email_label"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:inputType="textEmailSubject"/>
 
         <TextView
             android:id="@+id/birthdate_label"
@@ -131,12 +135,13 @@ android:layout_height="match_parent">
         <EditText
             android:id="@+id/birthdate"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:hint="05-12-2002"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/birthdate_label"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:inputType="date"/>
 
 
         <Button
@@ -157,15 +162,16 @@ android:layout_height="match_parent">
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_button"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="30dp"
             >
 
             <Button
