@@ -3,6 +3,8 @@
     import android.content.Context;
     import android.os.Bundle;
     import android.view.MenuItem;
+
+    import com.example.cornerfinder.generalmap.GeneralMapFragment;
     import com.example.cornerfinder.recommended.RecommendedFragment;
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
     import com.google.android.material.navigation.NavigationView;
@@ -67,7 +69,7 @@
                     } else if (item.getItemId() == R.id.nav_summermode) {
                         fragment = new SummerModeFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {
-                        //fragment = new MapsFR();
+                        fragment = new GeneralMapFragment();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {
                         fragment = new EditPreferencesFragment();
                     } else if (item.getItemId() == R.id.nav_closesession) {
