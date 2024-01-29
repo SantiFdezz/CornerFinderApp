@@ -2,27 +2,11 @@
 
     import android.app.Activity;
     import android.content.Context;
-    import android.graphics.Color;
-    import android.graphics.PorterDuff;
-    import android.graphics.PorterDuffColorFilter;
-    import android.graphics.drawable.Drawable;
     import android.os.Bundle;
-    import android.text.SpannableString;
-    import android.text.style.ForegroundColorSpan;
     import android.view.MenuItem;
-    import android.view.View;
-    import android.view.Menu;
-    import android.widget.Toast;
 
-    import com.android.volley.Request;
-    import com.android.volley.RequestQueue;
-    import com.android.volley.Response;
-    import com.android.volley.VolleyError;
-    import com.android.volley.toolbox.JsonArrayRequest;
-    import com.android.volley.toolbox.Volley;
-    import com.example.cornerfinder.summermode.SummerModeAdapter;
-    import com.example.cornerfinder.summermode.SummerModeData;
-    import com.google.android.material.snackbar.Snackbar;
+    import com.example.cornerfinder.recommended.RecommendedFragment;
+    import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
     import com.google.android.material.navigation.NavigationView;
 
     import androidx.activity.OnBackPressedCallback;
@@ -31,23 +15,9 @@
     import androidx.appcompat.widget.Toolbar;
     import androidx.core.view.GravityCompat;
     import androidx.fragment.app.Fragment;
-    import androidx.navigation.NavController;
-    import androidx.navigation.Navigation;
-    import androidx.navigation.ui.AppBarConfiguration;
-    import androidx.navigation.ui.NavigationUI;
     import androidx.drawerlayout.widget.DrawerLayout;
     import androidx.appcompat.app.AppCompatActivity;
-    import androidx.recyclerview.widget.LinearLayoutManager;
     import androidx.recyclerview.widget.RecyclerView;
-
-    import com.example.cornerfinder.databinding.ActivityMainBinding;
-
-    import org.json.JSONArray;
-    import org.json.JSONException;
-    import org.json.JSONObject;
-
-    import java.util.ArrayList;
-    import java.util.List;
 
     public class MainActivity extends AppCompatActivity {
         private Context context = this;
@@ -103,6 +73,10 @@
                         fragment = new AddlocationFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {
                         //fragment = new MapsFR();
+                    } else if (item.getItemId() == R.id.nav_edit_preferences) {
+                        fragment = new EditPreferencesFragment();
+                    } else if (item.getItemId() == R.id.nav_closesession) {
+                        //fragment = new ();
                     }
                     //si no llega ningun fragment
                     if (fragment != null) {
