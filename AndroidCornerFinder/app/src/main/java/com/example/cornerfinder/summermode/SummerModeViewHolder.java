@@ -2,6 +2,7 @@ package com.example.cornerfinder.summermode;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,7 +20,7 @@ public class SummerModeViewHolder extends RecyclerView.ViewHolder {
     private ImageView imageView;
     private Button location;
 
-
+    // Constructor que inicializa las vistas utilizando el diseño de celda:
     public SummerModeViewHolder(@NonNull View ivi){
         super(ivi);
         placeName = ivi.findViewById(R.id.placeName);
@@ -29,7 +30,7 @@ public class SummerModeViewHolder extends RecyclerView.ViewHolder {
         location = ivi.findViewById(R.id.location);
     }
 
-
+    // Método para mostrar los datos en las vistas correspondientes:
     public void showData(SummerModeData summerData){
         placeName.setText(summerData.getPlaceName());
         descripcion.setText(summerData.getDescripcion());
@@ -40,14 +41,8 @@ public class SummerModeViewHolder extends RecyclerView.ViewHolder {
             @Override
             // Comprobar que funciona bien el botón locatin y obtiene los datos.
             public void onClick(View v) {
-                System.out.println("Funciona el botón. Location: "+summerData.getLocation());
+                Log.i("Funciona el botón. Location: ", summerData.getLocation());
             }
         });
-
-
-
-
-
     }
-
 }
