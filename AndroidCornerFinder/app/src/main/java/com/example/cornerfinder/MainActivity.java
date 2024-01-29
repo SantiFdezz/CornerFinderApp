@@ -65,7 +65,6 @@
             drawerLayout = findViewById(R.id.drawer_layout);
             toolbar = findViewById(R.id.toolbar);
 
-
             //creamos metodo que cierre el menu y no la app
             getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
                 //metodo que cierra el menu si se pulsa atrás.

@@ -24,7 +24,7 @@ public class SavedPlacesViewHolder extends RecyclerView.ViewHolder {
 
     public SavedPlacesViewHolder(@NonNull View itemView) {
         super(itemView);
-        textViewName = (TextView) itemView.findViewById(R.id.name);
+        textViewName = (TextView) itemView.findViewById(R.id.place_name);
         textViewDescription = (TextView) itemView.findViewById(R.id.descripcion);
         textViewTag = (TextView) itemView.findViewById(R.id.tag);
         imageView = (ImageView) itemView.findViewById(R.id.image_view);

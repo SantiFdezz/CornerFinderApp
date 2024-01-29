@@ -64,6 +64,7 @@ public class SavedPlacesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        queue = Volley.newRequestQueue(this);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -114,6 +115,6 @@ public class SavedPlacesFragment extends Fragment {
                         error.printStackTrace();
                     }
                 });
-        this.requestQueue.add(request);
+        queue.add(request);
     }
 }

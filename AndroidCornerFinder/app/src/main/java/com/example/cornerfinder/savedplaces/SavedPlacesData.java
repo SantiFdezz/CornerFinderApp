@@ -36,8 +36,8 @@ public class SavedPlacesData {
 
     public SavedPlacesData(JSONObject json){
         try{
-            this.place_name=json.getString("name");
-            this.description=json.getString("description");
+            this.place_name=json.getString("place_name");
+            this.description=json.getString("descripcion");
             this.tag=json.getString("tag");
             this.location = json.getString("location");
             this.image_url = json.getString("image_url");
