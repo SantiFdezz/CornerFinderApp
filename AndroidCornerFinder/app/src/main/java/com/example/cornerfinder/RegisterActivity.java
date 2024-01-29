@@ -29,9 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         mAuth = FirebaseAuth.getInstance();
-
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         password2EditText = findViewById(R.id.password2);
@@ -68,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     .addOnCompleteListener(taskDb -> {
                                 if (taskDb.isSuccessful()) {
                                     Toast.makeText(context, "Registro Exitoso", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    Intent intent = new Intent(context, LoginActivity.class);
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(context, "Error al guardar datos:"+taskDb.getException().getMessage(), Toast.LENGTH_SHORT).show();
