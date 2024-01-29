@@ -1,30 +1,26 @@
     package com.example.cornerfinder;
 
-    import android.app.Activity;
     import android.content.Context;
     import android.os.Bundle;
     import android.view.MenuItem;
-
     import com.example.cornerfinder.recommended.RecommendedFragment;
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
     import com.google.android.material.navigation.NavigationView;
-
     import androidx.activity.OnBackPressedCallback;
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.ActionBarDrawerToggle;
+    import androidx.appcompat.app.AppCompatActivity;
     import androidx.appcompat.widget.Toolbar;
     import androidx.core.view.GravityCompat;
     import androidx.fragment.app.Fragment;
     import androidx.drawerlayout.widget.DrawerLayout;
-    import androidx.appcompat.app.AppCompatActivity;
-    import androidx.recyclerview.widget.RecyclerView;
+    import com.example.cornerfinder.summermode.SummerModeFragment;
+
 
     public class MainActivity extends AppCompatActivity {
         private Context context = this;
         private DrawerLayout drawerLayout;
         private Toolbar toolbar;
-        private Activity activity=this;
-        private RecyclerView recyclerView;
 
 
         @Override
@@ -33,7 +29,6 @@
             setContentView(R.layout.activity_main);
             drawerLayout = findViewById(R.id.drawer_layout);
             toolbar = findViewById(R.id.toolbar);
-
 
             //creamos metodo que cierre el menu y no la app
             getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -70,7 +65,7 @@
                     } else if (item.getItemId() == R.id.nav_lugaresguardados) {
                         fragment = new AddlocationFragment();
                     } else if (item.getItemId() == R.id.nav_summermode) {
-                        fragment = new AddlocationFragment();
+                        fragment = new SummerModeFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {
                         //fragment = new MapsFR();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {

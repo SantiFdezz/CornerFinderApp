@@ -16,12 +16,13 @@ public class SummerModeAdapter extends RecyclerView.Adapter<SummerModeViewHolder
     private List<SummerModeData> summer;
     private Activity activity;
 
+    // Constructor que recibe la lista de datos del SummerModeFragment y la actividad.
     public SummerModeAdapter(List<SummerModeData> dataSet, Activity activity){
         this.summer=dataSet;
         this.activity=activity;
     }
 
-
+    // Crea y devuelve un nuevo ViewHolder inflando el diseño de celda para que se visualice.
     @NonNull
     @Override
     public SummerModeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
@@ -30,13 +31,14 @@ public class SummerModeAdapter extends RecyclerView.Adapter<SummerModeViewHolder
         return new SummerModeViewHolder(summerView);
     }
 
+    // Asocia los datos de la posición actual a la vista del ViewHolder.
     @Override
     public void onBindViewHolder(@NonNull SummerModeViewHolder holder, int position){
         SummerModeData dataForThisCell = summer.get(position);
         holder.showData(dataForThisCell);
     }
 
-
+    // Devuelve la cantidad total de elementos en el conjunto de datos.
     @Override
     public int getItemCount(){ return summer.size(); }
 }
