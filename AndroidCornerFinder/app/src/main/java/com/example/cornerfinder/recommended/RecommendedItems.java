@@ -31,9 +31,9 @@ public class RecommendedItems {
 
     public RecommendedItems(JSONObject json){
         try{
-            this.placeName = json.getString("placeName");
+            this.placeName = json.getString("place_name");
             this.descripcion = json.getString("descripcion");
-            this.etiqueta = json.getString("etiqueta");
+            this.etiqueta = json.getString("tag");
             this.location = json.getString("location");
             this.image_url = json.getString("image_url");
         }catch (JSONException e){ e.printStackTrace(); }
