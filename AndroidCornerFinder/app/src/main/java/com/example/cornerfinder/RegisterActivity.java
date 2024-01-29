@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-import kotlinx.coroutines.scheduling.Task;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText, password2EditText, emailEditText, birthdateEditText;
@@ -74,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                             });
                         } else {
                             Log.e("TagError", task.getException().getMessage());
-                            Toast.makeText(RegisterActivity.this, "Registro fallido"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Registro fallido"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }

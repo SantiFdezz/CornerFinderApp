@@ -10,15 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b613db0c-25bd-4f99-82dc-aecf119f5f13" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/summermode/SummerModeFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_summermode.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/summermode/SummerModeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/summermode/SummerModeAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/summermode/SummerModeViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/summermode/SummerModeViewHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/summer_recycler_cell.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/summer_recycler_cell.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/RegisterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/recommended/RecommendedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/recommended/RecommendedItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_addlocation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_addlocation.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,5 +156,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/cornerfinder/RegisterActivity.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
