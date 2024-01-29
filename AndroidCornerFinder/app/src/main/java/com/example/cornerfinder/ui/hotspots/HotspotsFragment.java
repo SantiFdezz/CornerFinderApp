@@ -45,7 +45,7 @@ public class HotspotsFragment extends Fragment {
 // una lista.
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
-                "https://raw.githubusercontent.com/Bl4nc018/Proyectos-2-trimestre/main/beaches.json",
+                "https://raw.githubusercontent.com/Bl4nc018/Proyectos-2-trimestre/main/saved_places.json",
                 null,
                 response -> {
                     List<HotspotsData> allTheHotspots = new ArrayList<>();
