@@ -3,6 +3,8 @@ package com.example.cornerfinder;
 import android.location.Location;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -83,7 +85,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Reference UI elements
-         View view = inflater.inflate(R.layout.fragment_addlocation, container, false);
+        View view = inflater.inflate(R.layout.fragment_addlocation, container, false);
         nameEditText = view.findViewById(R.id.placeName);
         descriptionEditText = view.findViewById(R.id.description);
         checkBox1 = view.findViewById(R.id.checkbox1);
@@ -114,6 +116,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
 
         return view;
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

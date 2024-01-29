@@ -15,5 +15,16 @@
         android:name="com.example.cornerfinder.summermode.SummerModeFragment"
         android:label="Modo Verano"
         tools:layout="@layout/activity_main"/>
+    <fragment
+        android:id="@+id/nav_generalmap"
+        android:name="com.example.cornerfinder.generalmap.GeneralMapFragment"
+        android:label="Mapa General"
+        tools:layout="@layout/fragment_generalmap"/>
+    <fragment
+        android:name="com.example.cornerfinder.AddlocationFragment"
+        android:id="@+id/nav_addlocation"
+        android:label="Add location"
+        tools:layout="@layout/fragment_addlocation"/>
+
 
 </navigation>

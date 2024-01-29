@@ -1,5 +1,6 @@
 package com.example.cornerfinder.generalmap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cornerfinder.AddlocationFragment;
+import com.example.cornerfinder.MainActivity;
 import com.example.cornerfinder.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,11 +44,17 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Crear un Intent con una acción personalizada
+                Intent intent = new Intent(requireActivity(), MainActivity.class);
+                intent.setAction("ACTION_START_ADD_LOCATION");
+
+                // Iniciar la MainActivity
+                startActivity(intent);
+
+                // Finalizar la actividad actual si es necesario
+                requireActivity().finish();
             }
         });
-
-
-
         return view;
     }
 
@@ -59,5 +67,6 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
         LatLng sydney = new LatLng(43.362343,-8.411540);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in A Coruña"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 }

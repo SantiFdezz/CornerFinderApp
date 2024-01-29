@@ -32,6 +32,14 @@
             drawerLayout = findViewById(R.id.drawer_layout);
             toolbar = findViewById(R.id.toolbar);
 
+            // Verificar si la actividad se inició con una acción específica
+            if (getIntent().getAction() != null && getIntent().getAction().equals("ACTION_START_ADD_LOCATION")) {
+                // Inflar el fragmento AddlocationFragment
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new AddlocationFragment())
+                        .commit();
+            }
+
             //creamos metodo que cierre el menu y no la app
             getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
                 //metodo que cierra el menu si se pulsa atrás.
