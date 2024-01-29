@@ -26,7 +26,7 @@ public class SavedPlacesData {
         return image_url;
     }
 
-    public SavedPlacesData(String name, String imageName, String description, String tag, String imageNameHeart){
+    public SavedPlacesData(String place_name, String description, String tag, String location, String image_url){
         this.place_name = place_name;
         this.description = description;
         this.tag = tag;

@@ -37,6 +37,7 @@ public class SavedPlacesFragment extends Fragment {
     private RecyclerView recyclerView;
     private SavedPlacesAdapter adapter;
     private List<SavedPlacesData> savedPlacesDataList;
+    private RequestQueue queue;
 
     private RequestQueue requestQueue;
     // TODO: Rename parameter arguments, choose names that match
@@ -64,7 +65,6 @@ public class SavedPlacesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        queue = Volley.newRequestQueue(this);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -75,6 +75,8 @@ public class SavedPlacesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_saved_places, container, false);
+
+        queue = Volley.newRequestQueue(getContext());
 
         savedPlacesDataList = new ArrayList<>();
         adapter = new SavedPlacesAdapter(savedPlacesDataList, (Activity) getContext());
