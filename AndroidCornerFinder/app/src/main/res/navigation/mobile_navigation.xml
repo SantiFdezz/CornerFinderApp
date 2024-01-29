@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_summermode">
+    app:startDestination="@+id/nav_hotspots">
 
+    <fragment
+        android:id="@+id/nav_hotspots"
+        android:name="com.example.cornerfinder.ui.hotspots.HotspotsFragment"
+        android:label="@string/menu_hotspots"
+        tools:layout="@layout/fragment_hotspots" />
     <fragment
         android:id="@+id/nav_edit_preferences"
         android:name="com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment"
