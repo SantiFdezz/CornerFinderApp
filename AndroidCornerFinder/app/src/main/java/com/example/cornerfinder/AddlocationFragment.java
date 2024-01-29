@@ -84,7 +84,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
                              Bundle savedInstanceState) {
         // Reference UI elements
          View view = inflater.inflate(R.layout.fragment_addlocation, container, false);
-//        nameEditText = view.findViewById(R.id.name);
+        nameEditText = view.findViewById(R.id.placeName);
         descriptionEditText = view.findViewById(R.id.description);
         checkBox1 = view.findViewById(R.id.checkbox1);
         checkBox2 = view.findViewById(R.id.checkbox2);

@@ -32,6 +32,5 @@
             app:headerLayout="@layout/nav_header_main"
             android:background="@android:color/white"
             app:menu="@menu/menu_drawer" />
-
     </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>

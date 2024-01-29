@@ -51,7 +51,7 @@
             drawerLayout.addDrawerListener(toggle);
             toggle.syncState();
             NavigationView navigationView = findViewById(R.id.nav_view);
-            //creamos el elemento que escuchara en cual boton clickamos de nuestro menú
+            //   creamos el elemento que escuchara en cual boton clickamos de nuestro menú
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -61,11 +61,11 @@
                         //fragment = new ();
                     }else if(item.getItemId() == R.id.nav_recommended){
                         fragment = new RecommendedFragment();
-                    }else if(item.getItemId() == R.id.nav_lugaresguardados){
-//                        fragment = new AddlocationFragment();
-                    }else if(item.getItemId() == R.id.nav_summermode){
+                    } else if (item.getItemId() == R.id.nav_lugaresguardados) {
+                        fragment = new AddlocationFragment();
+                    } else if (item.getItemId() == R.id.nav_summermode) {
                         fragment = new SummerModeFragment();
-                    }else if(item.getItemId() == R.id.nav_generalmap){
+                    } else if (item.getItemId() == R.id.nav_generalmap) {
                         //fragment = new MapsFR();
                     }
                     //si no llega ningun fragment
