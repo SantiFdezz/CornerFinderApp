@@ -19,15 +19,32 @@
     <Button
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginStart="320dp"
         android:layout_marginTop="630dp"
         android:id="@+id/addButton"
         android:text="+"
         android:textSize="25sp"
         android:gravity="center"
         android:background="@drawable/circle"
+        app:backgroundTint="#ffe599"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="150dp"
+        android:id="@+id/addButton2"
+        android:text="Añadir este lugar"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addButton"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private boolean isButton2Visible = false;
 
     public GeneralMapFragment(){}
 
@@ -40,21 +41,34 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
 
 
         Button addButton = view.findViewById(R.id.addButton);
+        Button addButton2 = view.findViewById(R.id.addButton2);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Crear un Intent con una acción personalizada
+                if (isButton2Visible) {
+                    addButton2.setVisibility(View.INVISIBLE);
+                } else {
+                    addButton2.setVisibility(View.VISIBLE);
+                }
+
+                isButton2Visible = !isButton2Visible;
+            }
+        });
+
+
+        addButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Creado un intent para ir al mainActivity e inflar alli el fragmento.
                 Intent intent = new Intent(requireActivity(), MainActivity.class);
                 intent.setAction("ACTION_START_ADD_LOCATION");
 
                 // Iniciar la MainActivity
                 startActivity(intent);
-
-                // Finalizar la actividad actual si es necesario
-                requireActivity().finish();
             }
         });
+
         return view;
     }
 
