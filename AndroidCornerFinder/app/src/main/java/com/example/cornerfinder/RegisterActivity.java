@@ -21,6 +21,7 @@ import java.util.Calendar;
 public class RegisterActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText, password2EditText, emailEditText, birthdateEditText;
     private Context context = this;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
     private FirebaseAuth mAuth;
     private Button registerPage, loginPage, registerButton;
     @Override
@@ -36,24 +37,26 @@ public class RegisterActivity extends AppCompatActivity {
         birthdateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR);
-                int mMonth = c.get(Calendar.MONTH);
-                int mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                if (year < 2024) {
-                                    birthdateEditText.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                                } else {
-                                    birthdateEditText.setText("");
-                                }
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        RegisterActivity.this,
+                        dateSetListener,
+                        year, month, day);
+                dialog.show();
             }
         });
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month + 1; // Month is 0-based, so we add 1
+                String date = day + "-" + month + "-" + year;
+                birthdateEditText.setText(date);
+            }
+        };
         registerButton = findViewById(R.id.register_button);
         registerPage = findViewById(R.id.register_page);
         loginPage = findViewById(R.id.login_page);
@@ -73,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password2 = password2EditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
         String birthdate = birthdateEditText.getText().toString().trim();
+        birthdateEditText.setKeyListener(null);
         if (validateRegister(username,password,password2,email,birthdate)){
             mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, task-> {
