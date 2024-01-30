@@ -31,7 +31,8 @@
     import androidx.fragment.app.Fragment;
     import androidx.drawerlayout.widget.DrawerLayout;
     import com.example.cornerfinder.summermode.SummerModeFragment;
-
+    import com.example.cornerfinder.ui.hotspots.HotspotsFragment;
+    import com.google.android.material.navigation.NavigationView;
 
     public class MainActivity extends AppCompatActivity {
         private Context context = this;
@@ -60,7 +61,6 @@
                     }
                 }
             });
-
             setSupportActionBar(toolbar);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -74,13 +74,13 @@
                     // menu que lleva a sus actividades
                     Fragment fragment = null;
                     if (item.getItemId() == R.id.nav_hotspots) {
-                        //fragment = new ();
+                        fragment = new HotspotsFragment();
                     } else if (item.getItemId() == R.id.nav_recommended) {
                         fragment = new RecommendedFragment();
                     } else if (item.getItemId() == R.id.nav_lugaresguardados) {
                         fragment = new SavedPlacesFragment();
                     } else if (item.getItemId() == R.id.nav_summermode) {
-                        fragment = new AddlocationFragment();
+                        fragment = new SummerModeFragment();
                     }else if(item.getItemId() == R.id.nav_lugaresguardados){
                         fragment = new SavedPlacesFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {

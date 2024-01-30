@@ -74,13 +74,13 @@ public class SavedPlacesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_saved_places, container, false);
+        View view = inflater.inflate(R.layout.fragment_recycler, container, false);
 
         queue = Volley.newRequestQueue(getContext());
 
         savedPlacesDataList = new ArrayList<>();
         adapter = new SavedPlacesAdapter(savedPlacesDataList, (Activity) getContext());
-        recyclerView = view.findViewById(R.id.saved_places_recycler_view);
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
