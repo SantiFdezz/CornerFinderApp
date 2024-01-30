@@ -6,6 +6,7 @@
 
     import com.example.cornerfinder.generalmap.GeneralMapFragment;
     import com.example.cornerfinder.recommended.RecommendedFragment;
+    import com.example.cornerfinder.routes.Routes;
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
     import com.google.android.material.navigation.NavigationView;
     import androidx.activity.OnBackPressedCallback;
@@ -78,6 +79,8 @@
                         fragment = new SummerModeFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {
                         fragment = new GeneralMapFragment();
+                    } else if (item.getItemId() == R.id.nav_routes) {
+                        fragment = new Routes();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {
                         fragment = new EditPreferencesFragment();
                     } else if (item.getItemId() == R.id.nav_closesession) {
