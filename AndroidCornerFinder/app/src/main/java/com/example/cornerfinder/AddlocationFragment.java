@@ -3,6 +3,8 @@ package com.example.cornerfinder;
 import android.location.Location;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -48,9 +50,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
     private String mParam1;
     private String mParam2;
 
-    public AddlocationFragment() {
-        // Required empty public constructor
-    }
+    public AddlocationFragment() {    }
 
     /**
      * Use this factory method to create a new instance of
@@ -83,7 +83,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Reference UI elements
-         View view = inflater.inflate(R.layout.fragment_addlocation, container, false);
+        View view = inflater.inflate(R.layout.fragment_addlocation, container, false);
         nameEditText = view.findViewById(R.id.placeName);
         descriptionEditText = view.findViewById(R.id.description);
         checkBox1 = view.findViewById(R.id.checkbox1);
@@ -114,13 +114,18 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
 
         return view;
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(43.362343,-8.411540);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in A Coruña"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng yo = new LatLng(43.36700, -8.412600);
+        mMap.addMarker(new MarkerOptions().position(yo).title("Mi ubicación"));
+
+        // Especifica el nivel de zoom deseado (puedes ajustar este valor según tus necesidades)
+        float zoomLevel = 15.0f;
+
+        // Mueve la cámara al punto con el nivel de zoom especificado
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yo, zoomLevel));
     }
 }

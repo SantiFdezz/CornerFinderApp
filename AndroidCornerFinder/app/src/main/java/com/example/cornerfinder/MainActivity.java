@@ -3,6 +3,8 @@
     import android.content.Context;
     import android.os.Bundle;
     import android.view.MenuItem;
+
+    import com.example.cornerfinder.generalmap.GeneralMapFragment;
     import com.example.cornerfinder.recommended.RecommendedFragment;
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
     import com.google.android.material.navigation.NavigationView;
@@ -30,6 +32,14 @@
             setContentView(R.layout.activity_main);
             drawerLayout = findViewById(R.id.drawer_layout);
             toolbar = findViewById(R.id.toolbar);
+
+            // Verificar si la actividad se inició con una acción específica
+            if (getIntent().getAction() != null && getIntent().getAction().equals("ACTION_START_ADD_LOCATION")) {
+                // Inflar el fragmento AddlocationFragment
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new AddlocationFragment())
+                        .commit();
+            }
 
             //creamos metodo que cierre el menu y no la app
             getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -67,7 +77,7 @@
                     } else if (item.getItemId() == R.id.nav_summermode) {
                         fragment = new SummerModeFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {
-                        //fragment = new MapsFR();
+                        fragment = new GeneralMapFragment();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {
                         fragment = new EditPreferencesFragment();
                     } else if (item.getItemId() == R.id.nav_closesession) {
