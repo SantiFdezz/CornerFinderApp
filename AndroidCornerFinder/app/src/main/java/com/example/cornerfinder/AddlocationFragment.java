@@ -50,9 +50,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
     private String mParam1;
     private String mParam2;
 
-    public AddlocationFragment() {
-        // Required empty public constructor
-    }
+    public AddlocationFragment() {    }
 
     /**
      * Use this factory method to create a new instance of
@@ -120,7 +118,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        
+
         LatLng sydney = new LatLng(43.362343,-8.411540);
         mMap.addMarker(new MarkerOptions().position(sydney).title("A Coruña"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));

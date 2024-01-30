@@ -39,9 +39,7 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_generalmap, container, false);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
+        if (mapFragment != null) { mapFragment.getMapAsync(this); }
 
 
         Button addButton = view.findViewById(R.id.addButton);
