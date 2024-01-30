@@ -96,6 +96,8 @@
                         fragment = new GeneralMapFragment();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {
                         fragment = new EditPreferencesFragment();
+                    }else if (item.getItemId() == R.id.nav_accountsettings){
+                        fragment = new AccountSettingsFragment();
                     } else if (item.getItemId() == R.id.nav_closesession) {
                         //fragment = new ();
                     }
