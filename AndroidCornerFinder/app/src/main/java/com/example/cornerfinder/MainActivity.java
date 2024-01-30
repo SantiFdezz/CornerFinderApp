@@ -4,10 +4,25 @@
     import android.os.Bundle;
     import android.view.MenuItem;
 
+    import android.view.View;
+    import android.view.Menu;
+    import android.widget.Toast;
+
+    import com.android.volley.Request;
+    import com.android.volley.RequestQueue;
+    import com.android.volley.Response;
+    import com.android.volley.VolleyError;
+    import com.android.volley.toolbox.JsonArrayRequest;
+    import com.android.volley.toolbox.Volley;
+    import com.example.cornerfinder.savedplaces.SavedPlacesFragment;
+    import com.example.cornerfinder.summermode.SummerModeAdapter;
+    import com.example.cornerfinder.summermode.SummerModeData;
+    import com.google.android.material.snackbar.Snackbar;
+    import com.google.android.material.navigation.NavigationView;
+
     import com.example.cornerfinder.generalmap.GeneralMapFragment;
     import com.example.cornerfinder.recommended.RecommendedFragment;
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
-    import com.google.android.material.navigation.NavigationView;
     import androidx.activity.OnBackPressedCallback;
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -24,7 +39,6 @@
         private Context context = this;
         private DrawerLayout drawerLayout;
         private Toolbar toolbar;
-
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {//inicializamos los atributos
@@ -73,9 +87,11 @@
                     } else if (item.getItemId() == R.id.nav_recommended) {
                         fragment = new RecommendedFragment();
                     } else if (item.getItemId() == R.id.nav_lugaresguardados) {
-                        fragment = new AddlocationFragment();
+                        fragment = new SavedPlacesFragment();
                     } else if (item.getItemId() == R.id.nav_summermode) {
                         fragment = new SummerModeFragment();
+                    }else if(item.getItemId() == R.id.nav_lugaresguardados){
+                        fragment = new SavedPlacesFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {
                         fragment = new GeneralMapFragment();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {
@@ -83,6 +99,7 @@
                     } else if (item.getItemId() == R.id.nav_closesession) {
                         //fragment = new ();
                     }
+
                     //si no llega ningun fragment
                     if (fragment != null) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
