@@ -86,8 +86,8 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
 
 
 
-        LatLng yo = new LatLng(43.362343, -8.411540);
-        mMap.addMarker(new MarkerOptions().position(yo).title("A Coruña"));
+        LatLng yo = new LatLng(43.36700, -8.412600);
+        mMap.addMarker(new MarkerOptions().position(yo).title("Mi ubicación"));
 
         LatLng asLapas = new LatLng(43.383636, -8.405864);
         mMap.addMarker(new MarkerOptions().position(asLapas).title("Playa das Lapas").icon(purpleIcon));

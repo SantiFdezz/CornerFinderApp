@@ -119,8 +119,13 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng sydney = new LatLng(43.362343,-8.411540);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("A Coruña"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng yo = new LatLng(43.36700, -8.412600);
+        mMap.addMarker(new MarkerOptions().position(yo).title("Mi ubicación"));
+
+        // Especifica el nivel de zoom deseado (puedes ajustar este valor según tus necesidades)
+        float zoomLevel = 15.0f;
+
+        // Mueve la cámara al punto con el nivel de zoom especificado
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yo, zoomLevel));
     }
 }
