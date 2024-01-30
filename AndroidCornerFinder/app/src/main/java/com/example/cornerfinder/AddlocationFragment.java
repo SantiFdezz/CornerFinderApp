@@ -84,7 +84,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
                              Bundle savedInstanceState) {
         // Reference UI elements
          View view = inflater.inflate(R.layout.fragment_addlocation, container, false);
-        nameEditText = view.findViewById(R.id.name);
+        nameEditText = view.findViewById(R.id.placeName);
         descriptionEditText = view.findViewById(R.id.description);
         checkBox1 = view.findViewById(R.id.checkbox1);
         checkBox2 = view.findViewById(R.id.checkbox2);
@@ -119,8 +119,8 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
         mMap = googleMap;
 
         // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(43.362343,-8.411540);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in A Coruña"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

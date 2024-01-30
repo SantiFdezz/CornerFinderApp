@@ -1,6 +1,5 @@
 package com.example.cornerfinder;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -13,14 +12,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Calendar;
+
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText, password2EditText, emailEditText, birthdateEditText;
@@ -31,9 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         mAuth = FirebaseAuth.getInstance();
-
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         password2EditText = findViewById(R.id.password2);
@@ -91,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     .addOnCompleteListener(taskDb -> {
                                 if (taskDb.isSuccessful()) {
                                     Toast.makeText(context, "Registro Exitoso", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    Intent intent = new Intent(context, LoginActivity.class);
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(context, "Error al guardar datos:"+taskDb.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -99,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                             });
                         } else {
                             Log.e("TagError", task.getException().getMessage());
-                            Toast.makeText(RegisterActivity.this, "Registro fallido"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Registro fallido"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
