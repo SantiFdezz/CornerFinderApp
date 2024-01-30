@@ -3,12 +3,14 @@ package com.example.cornerfinder;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText, password2EditText, emailEditText, birthdateEditText;
@@ -35,6 +39,27 @@ public class RegisterActivity extends AppCompatActivity {
         password2EditText = findViewById(R.id.password2);
         emailEditText = findViewById(R.id.email);
         birthdateEditText = findViewById(R.id.birthdate);
+        birthdateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                if (year < 2024) {
+                                    birthdateEditText.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                } else {
+                                    birthdateEditText.setText("");
+                                }
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
         registerButton = findViewById(R.id.register_button);
         registerPage = findViewById(R.id.register_page);
         loginPage = findViewById(R.id.login_page);
