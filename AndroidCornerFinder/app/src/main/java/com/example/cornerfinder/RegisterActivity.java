@@ -53,7 +53,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 month = month + 1; // Month is 0-based, so we add 1
-                String date = day + "-" + month + "-" + year;
+                String strMonth;
+                if (month < 10) {
+                    strMonth = "0" + month;
+                } else {
+                    strMonth = String.valueOf(month);
+                }
+                String date = day + "-" + strMonth + "-" + year;
                 birthdateEditText.setText(date);
             }
         };
