@@ -10,4 +10,5 @@
     <color name="red">#FF0000</color>
     <color name="holo_pink_light">#FFC0CB</color>
     <color name="cornerfinder">#4B0082</color>
+    <color name="grey">#3B444B</color>
 </resources>
