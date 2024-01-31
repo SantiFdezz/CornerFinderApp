@@ -24,7 +24,7 @@ public class AccountData {
     public AccountData(JSONObject json){
         try{
             this.placeName = json.getString("place_name");
-            this.descripcion = json.getString("descripcion");
+            this.descripcion = json.getString("description");
             this.image_url = json.getString("image_url");
         }catch (JSONException e){ e.printStackTrace(); }
     }

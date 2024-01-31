@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,8 +22,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cornerfinder.R;
+import com.example.cornerfinder.RegisterActivity;
 import com.example.cornerfinder.ui.account.AccountAdapter;
 import com.example.cornerfinder.ui.account.AccountData;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,10 +43,20 @@ import java.util.List;
 
 public class AccountFragment extends Fragment {
     private RecyclerView recyclerView;
+    private String username, email, uid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
+            getUser(uid);
+            email = user.getEmail();
+        }
+        TextView usernameText = view.findViewById(R.id.text_account);
+        TextView emailText = view.findViewById(R.id.text_email);
+        usernameText.setText(username);
+        emailText.setText(email);
         recyclerView = view.findViewById(R.id.account_saved_places_recycler_view);
 
         // Tras identificar el RecyclerView, pasamos a realizar la petición para obtener la info.
@@ -76,4 +96,28 @@ public class AccountFragment extends Fragment {
         return view;
     }
 
+    private void getUser (String uid){
+        DatabaseReference favRef = FirebaseDatabase.getInstance().getReference("usuarios").child(uid).child("username");
+        favRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    username = snapshot.getValue(String.class);
+                    setUsername(username);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                username = "Username";
+                setUsername(username);
+            }
+
+        });
+    }
+
+    private void setUsername(String username){
+        this.username = username;
+    }
 }
