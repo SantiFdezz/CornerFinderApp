@@ -1,14 +1,25 @@
 package com.example.cornerfinder.routes;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.cornerfinder.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,21 +30,32 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.PolyUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class Routes extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
+    private RequestQueue requestQueue;
+    private Location lastKnownLocation;
+    private FusedLocationProviderClient fusedLocationClient;
     public Routes(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_routes, container, false);
 
+        requestQueue = Volley.newRequestQueue(getContext());
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
+        if (mapFragment != null) { mapFragment.getMapAsync(this); }
         return view;
     }
 
@@ -46,10 +68,6 @@ public class Routes extends Fragment implements OnMapReadyCallback {
         BitmapDescriptor purpleIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
 
         BitmapDescriptor orangeIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
-
-
-        LatLng yo = new LatLng(43.36700, -8.412600);
-        mMap.addMarker(new MarkerOptions().position(yo).title("Mi ubicación"));
 
         LatLng asLapas = new LatLng(43.383636, -8.405864);
         mMap.addMarker(new MarkerOptions().position(asLapas).title("Playa das Lapas").icon(purpleIcon));
@@ -72,10 +90,8 @@ public class Routes extends Fragment implements OnMapReadyCallback {
         LatLng encrucijada = new LatLng(43.370500, -8.395800);
         mMap.addMarker(new MarkerOptions().position(encrucijada).title("La Encrucijada").icon(orangeIcon));
 
-
         // Ajustar el zoom para incluir todos los marcadores
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(yo);
         builder.include(asLapas);
         builder.include(matadero);
         builder.include(orzan);
@@ -88,5 +104,77 @@ public class Routes extends Fragment implements OnMapReadyCallback {
         int padding = 200; // Puedes ajustar el espacio alrededor de los marcadores
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         mMap.animateCamera(cu);
+
+        // Comprobamos que los permisos de ubicación están concedidos:
+        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+            return;
+        }
+
+        mMap.setMyLocationEnabled(true);
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(),
+                location -> {
+                    if (location != null) {
+                        lastKnownLocation = location;
+                        Toast.makeText(getActivity(), location.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+        mMap.setOnMarkerClickListener(marker -> {
+            LatLng destination = marker.getPosition();
+            calculateRoute(lastKnownLocation, destination);
+                return true;
+        });
     }
+
+    private String getDirectionsUrl(LatLng origin, LatLng destination, String apiKey){
+        String str_origin = "origin="+origin.latitude+","+origin.longitude;;
+        String str_dest = "destination="+destination.latitude+","+destination.longitude;
+        String sensor = "sensor=false";
+        String mode = "mode=walking";
+
+        String url = "https://maps.googleapis.com/maps/api/directions/json?"+
+                str_origin+"&"+str_dest+"&"+sensor+"&"+mode+"&key="+apiKey;
+
+        return url;
+    }
+
+    private void drawRoute(JSONObject response){
+        try{
+            Toast.makeText(getContext(), "Dibujando ruta ...", Toast.LENGTH_SHORT).show();
+
+            // Obtiene la ruta principal
+            JSONObject route = response.getJSONArray("routes").getJSONObject(0);
+            JSONObject overviewPolyline = route.getJSONObject("overview_polyline");
+            String encodedPath = overviewPolyline.getString("points");
+            List<LatLng> path = PolyUtil.decode(encodedPath);
+
+            // Dibuja la ruta en el mapa
+            mMap.addPolyline(new PolylineOptions().addAll(path));
+        }catch (JSONException e){
+            e.printStackTrace();
+            Toast.makeText(getContext(),e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void calculateRoute(Location origin, LatLng destination){
+        if(origin==null){
+            Toast.makeText(getContext(), "No hay origen", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LatLng originLatLng = new LatLng(origin.getLatitude(), origin.getLongitude());
+        String apiKey = "AIzaSyDepnk_Vlv1_9OT6MM-wPQ9LsqzQ1nKZtI";
+        String url = getDirectionsUrl(originLatLng, destination, apiKey);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> drawRoute(response), error -> error.printStackTrace());
+
+        requestQueue.add(request);
+    }
+
 }
