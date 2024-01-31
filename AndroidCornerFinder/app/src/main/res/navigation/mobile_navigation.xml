@@ -9,7 +9,7 @@
         android:id="@+id/nav_hotspots"
         android:name="com.example.cornerfinder.ui.hotspots.HotspotsFragment"
         android:label="@string/menu_hotspots"
-        tools:layout="@layout/fragment_hotspots" />
+        tools:layout="@layout/fragment_recycler" />
     <fragment
         android:id="@+id/nav_edit_preferences"
         android:name="com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment"
@@ -20,7 +20,7 @@
         android:id="@+id/nav_summermode"
         android:name="com.example.cornerfinder.summermode.SummerModeFragment"
         android:label="Modo Verano"
-        tools:layout="@layout/activity_main"/>
+        tools:layout="@layout/fragment_recycler"/>
 
     <fragment
         android:id="@+id/nav_generalmap"
@@ -39,6 +39,4 @@
         android:id="@+id/nav_routes"
         android:label="Routes"
         tools:layout="@layout/fragment_routes" />
-
-
 </navigation>

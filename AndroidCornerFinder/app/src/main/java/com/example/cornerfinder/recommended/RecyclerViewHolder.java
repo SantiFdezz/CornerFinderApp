@@ -10,31 +10,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cornerfinder.R;
-import com.example.cornerfinder.summermode.SummerModeData;
 import com.example.cornerfinder.summermode.Util;
 
-public class RecommendedViewHolder extends RecyclerView.ViewHolder {
-    private TextView placeName;
-    private TextView etiqueta;
-    private TextView descripcion;
+public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+    private TextView place_name;
+    private TextView tag;
+    private TextView description;
     private ImageView imageView;
     private Button location;
 
 
-    public RecommendedViewHolder(@NonNull View ivi){
+    public RecyclerViewHolder(@NonNull View ivi){
         super(ivi);
-        placeName = ivi.findViewById(R.id.placeName);
-        etiqueta = ivi.findViewById(R.id.etiqueta);
-        descripcion = ivi.findViewById(R.id.descripcion);
+        place_name = ivi.findViewById(R.id.place_name);
+        tag = ivi.findViewById(R.id.tag);
+        description = ivi.findViewById(R.id.description);
         imageView = ivi.findViewById(R.id.image_view);
         location = ivi.findViewById(R.id.location);
     }
 
 
-    public void showData(RecommendedItems items){
-        placeName.setText(items.getPlaceName());
-        descripcion.setText(items.getDescripcion());
-        etiqueta.setText(items.getEtiqueta());
+    public void showData(RecyclerItems items){
+        place_name.setText(items.getPlace_Name());
+        description.setText(items.getDescription());
+        tag.setText(items.getTag());
         Util.downloadBitmapToImageView(items.getImage_url(), this.imageView);
 
         location.setOnClickListener(new View.OnClickListener() {

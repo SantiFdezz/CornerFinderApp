@@ -1,6 +1,5 @@
 package com.example.cornerfinder.savedplaces;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,25 +17,22 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cornerfinder.R;
-import com.example.cornerfinder.Server;
-import com.example.cornerfinder.summermode.SummerModeAdapter;
-import com.example.cornerfinder.summermode.SummerModeData;
+import com.example.cornerfinder.recommended.RecyclerAdapter;
+import com.example.cornerfinder.recommended.RecyclerItems;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SavedPlacesFragment extends Fragment {
     private RecyclerView recyclerView;
-    private SavedPlacesAdapter adapter;
-    private List<SavedPlacesData> savedPlacesDataList;
+    private RecyclerAdapter adapter;
+    private List<RecyclerItems> savedPlacesDataList;
     private RequestQueue queue;
 
     private RequestQueue requestQueue;
@@ -79,8 +75,8 @@ public class SavedPlacesFragment extends Fragment {
         queue = Volley.newRequestQueue(getContext());
 
         savedPlacesDataList = new ArrayList<>();
-        adapter = new SavedPlacesAdapter(savedPlacesDataList, (Activity) getContext());
-        recyclerView = view.findViewById(R.id.recyclerView);
+        adapter = new RecyclerAdapter(savedPlacesDataList, this);
+        recyclerView = view.findViewById(R.id.recycler_view_item);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
@@ -97,11 +93,11 @@ public class SavedPlacesFragment extends Fragment {
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
-                                List<SavedPlacesData> allTheSavedPlaces = new ArrayList<>();
+                                List<RecyclerItems> allTheSavedPlaces = new ArrayList<>();
                                 for(int i=0; i<response.length(); i++) {
                                     try {
                                         JSONObject places = response.getJSONObject(i);
-                                        SavedPlacesData data = new SavedPlacesData(places);
+                                        RecyclerItems data = new RecyclerItems(places);
                                         savedPlacesDataList.add(data);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
