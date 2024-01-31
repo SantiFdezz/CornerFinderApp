@@ -3,9 +3,26 @@
     import android.content.Context;
     import android.os.Bundle;
     import android.view.MenuItem;
+
+    import android.view.View;
+    import android.view.Menu;
+    import android.widget.Toast;
+
+    import com.android.volley.Request;
+    import com.android.volley.RequestQueue;
+    import com.android.volley.Response;
+    import com.android.volley.VolleyError;
+    import com.android.volley.toolbox.JsonArrayRequest;
+    import com.android.volley.toolbox.Volley;
+    import com.example.cornerfinder.savedplaces.SavedPlacesFragment;
+    import com.example.cornerfinder.summermode.SummerModeAdapter;
+    import com.example.cornerfinder.summermode.SummerModeData;
+    import com.google.android.material.snackbar.Snackbar;
+    import com.google.android.material.navigation.NavigationView;
+
+    import com.example.cornerfinder.generalmap.GeneralMapFragment;
     import com.example.cornerfinder.recommended.RecommendedFragment;
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
-    import com.google.android.material.navigation.NavigationView;
     import androidx.activity.OnBackPressedCallback;
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,13 +32,13 @@
     import androidx.fragment.app.Fragment;
     import androidx.drawerlayout.widget.DrawerLayout;
     import com.example.cornerfinder.summermode.SummerModeFragment;
-
+    import com.example.cornerfinder.ui.hotspots.HotspotsFragment;
+    import com.google.android.material.navigation.NavigationView;
 
     public class MainActivity extends AppCompatActivity {
         private Context context = this;
         private DrawerLayout drawerLayout;
         private Toolbar toolbar;
-
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {//inicializamos los atributos
@@ -29,6 +46,14 @@
             setContentView(R.layout.activity_main);
             drawerLayout = findViewById(R.id.drawer_layout);
             toolbar = findViewById(R.id.toolbar);
+
+            // Verificar si la actividad se inició con una acción específica
+            if (getIntent().getAction() != null && getIntent().getAction().equals("ACTION_START_ADD_LOCATION")) {
+                // Inflar el fragmento AddlocationFragment
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new AddlocationFragment())
+                        .commit();
+            }
 
             //creamos metodo que cierre el menu y no la app
             getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -45,7 +70,6 @@
                     }
                 }
             });
-
             setSupportActionBar(toolbar);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -59,20 +83,25 @@
                     // menu que lleva a sus actividades
                     Fragment fragment = null;
                     if (item.getItemId() == R.id.nav_hotspots) {
-                        //fragment = new ();
+                        fragment = new HotspotsFragment();
                     } else if (item.getItemId() == R.id.nav_recommended) {
                         fragment = new RecommendedFragment();
                     } else if (item.getItemId() == R.id.nav_lugaresguardados) {
-                        fragment = new AddlocationFragment();
+                        fragment = new SavedPlacesFragment();
                     } else if (item.getItemId() == R.id.nav_summermode) {
                         fragment = new SummerModeFragment();
+                    }else if(item.getItemId() == R.id.nav_lugaresguardados){
+                        fragment = new SavedPlacesFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {
-                        //fragment = new MapsFR();
+                        fragment = new GeneralMapFragment();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {
                         fragment = new EditPreferencesFragment();
+                    }else if (item.getItemId() == R.id.nav_accountsettings){
+                        fragment = new AccountSettingsFragment();
                     } else if (item.getItemId() == R.id.nav_closesession) {
                         //fragment = new ();
                     }
+
                     //si no llega ningun fragment
                     if (fragment != null) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
