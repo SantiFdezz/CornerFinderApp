@@ -27,24 +27,30 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
-
     private GoogleMap mMap;
+
+
+    // Esta variable es para variar la visibilidad del botón de añadir un sitio al mapa general.
     private boolean isButton2Visible = false;
 
-    public GeneralMapFragment(){}
+    public GeneralMapFragment(){} // Constructor.
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Reference UI elements
+
         View view = inflater.inflate(R.layout.fragment_generalmap, container, false);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) { mapFragment.getMapAsync(this); }
 
 
+        // Definimos los dos botones para el añadido de marcadores a nuestro mapa general.
+
         Button addButton = view.findViewById(R.id.addButton);
         Button addButton2 = view.findViewById(R.id.addButton2);
 
+        // Jugamos con un listener para hacer el 2º botón invisible según si se hace click en el
+        // primero o no.
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,20 +59,18 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
                 } else {
                     addButton2.setVisibility(View.VISIBLE);
                 }
-
                 isButton2Visible = !isButton2Visible;
             }
         });
 
-
+        // Si pulsamos el botón "Añadir...", nos llevará a otra pantalla donde se llevará a cabo
+        // ese proceso de forma más completa.
         addButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Creado un intent para ir al mainActivity e inflar alli el fragmento.
+                // Intent para ir al mainActivity e inflar alli el fragmento.
                 Intent intent = new Intent(requireActivity(), MainActivity.class);
                 intent.setAction("ACTION_START_ADD_LOCATION");
-
-                // Iniciar la MainActivity
                 startActivity(intent);
             }
         });
@@ -75,17 +79,17 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
     }
 
 
+    // Aquí ya trabajamos con el mapa para trabajar con los diversos sitios ya registrados en la app.
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Crear un BitmapDescriptor morado
-        BitmapDescriptor purpleIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
 
+        // Creamos un Bitmap para poder cambiar el color de los marcadores.
+        BitmapDescriptor purpleIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
         BitmapDescriptor orangeIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
 
-
-
+        // Añadimos los marcadores deseados:
         LatLng yo = new LatLng(43.36700, -8.412600);
         mMap.addMarker(new MarkerOptions().position(yo).title("Mi ubicación"));
 
@@ -111,7 +115,9 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(encrucijada).title("La Encrucijada").icon(orangeIcon));
 
 
-        // Ajustar el zoom para incluir todos los marcadores
+        // Para ajustar la cámara del mapa, jugamos con LatLngBounds. Con el builder añadiremos los
+        // marcadores deseados al mapa y la clase realizará el ajuste deseado para que aparezcan
+        // todos los marcadores en el mapa.
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(yo);
         builder.include(asLapas);
@@ -123,10 +129,8 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
         builder.include(encrucijada);
         LatLngBounds bounds = builder.build();
 
-        int padding = 200; // Puedes ajustar el espacio alrededor de los marcadores
+        int padding = 200; // Puedes ajustar el espacio de los bordes.
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         mMap.animateCamera(cu);
     }
-
-
 }
