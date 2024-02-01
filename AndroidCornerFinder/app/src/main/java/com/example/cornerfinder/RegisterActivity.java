@@ -104,7 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
                         } else {
                             Log.e("TagError", task.getException().getMessage());
                             Toast.makeText(context, "Registro fallido"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
                         }
                     });
         }

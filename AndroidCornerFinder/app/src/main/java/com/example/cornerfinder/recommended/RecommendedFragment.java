@@ -35,8 +35,8 @@ import java.util.List;
  */
 public class RecommendedFragment extends Fragment {
     private RecyclerView recyclerView;
-    private RecyclerAdapter adapter;
-    private List<RecyclerItems> recommendedList;
+    private RecommendedAdapter adapter;
+    private List<RecommendedItems> recommendedList;
 
     private RequestQueue requestQueue;
 
@@ -86,8 +86,8 @@ public class RecommendedFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recycler, container, false);
         recommendedList = new ArrayList<>();
-        adapter = new RecyclerAdapter(recommendedList, this);
-        recyclerView = view.findViewById(R.id.recycler_view_item);
+        adapter = new RecommendedAdapter(recommendedList, (Activity) getContext());
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
@@ -104,10 +104,11 @@ public class RecommendedFragment extends Fragment {
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
+                                List<RecommendedItems> flights = new ArrayList<>();
                                 for(int i=0; i<response.length(); i++) {
                                     try {
                                         JSONObject r_places = response.getJSONObject(i);
-                                        RecyclerItems place = new RecyclerItems(r_places);
+                                        RecommendedItems place = new RecommendedItems(r_places);
                                         recommendedList.add(place);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
