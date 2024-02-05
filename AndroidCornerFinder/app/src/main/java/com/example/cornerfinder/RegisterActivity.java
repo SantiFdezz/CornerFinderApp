@@ -138,11 +138,12 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean validateRegister(String username, String password,String password2, String email, String birthdate){
         // Verificación de que todos los campos estén llenos
         if (username.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty() ||birthdate.isEmpty()){
-            Toast.makeText(this, "Debes rellenar todos los campos!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Uno/s de los campos no han sido completados!", Toast.LENGTH_SHORT).show();
             return false;
         }
         // Verificación de que las contraseñas coincidan
         if (!password.equals(password2)){
+            Toast.makeText(this, "Registro fallido, las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
             passwordEditText.setError("Las contraseñas deben coincidir");
             password2EditText.setError("Las contraseñas deben coincidir");
             return false;
