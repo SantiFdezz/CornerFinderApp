@@ -28,16 +28,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SummerModeFragment extends Fragment {
-    private RecyclerView recyclerView;
-    private RecyclerAdapter adapter;
-    private List<RecyclerItems> summerModeList;
+    private RecyclerView recyclerView; // RecyclerView para mostrar la lista de elementos
+    private RecyclerAdapter adapter; // Adaptador para el RecyclerView
+    private List<RecyclerItems> summerModeList; // Lista de elementos para el RecyclerView
     private Fragment fragment = this;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflamos el diseño del fragmento.
         View view = inflater.inflate(R.layout.fragment_recycler, container, false);
 
+        // Obtenemos la referencia del RecyclerView del diseño inflado.
         recyclerView = view.findViewById(R.id.recycler_view_item);
+        // Inicializamos la lista de elementos.
         summerModeList = new ArrayList<>();
 
         // Tras identificar el RecyclerView, pasamos a realizar la petición para obtener la info.
