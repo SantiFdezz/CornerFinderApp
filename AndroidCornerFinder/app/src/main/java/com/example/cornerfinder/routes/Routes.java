@@ -39,23 +39,28 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Routes extends Fragment implements OnMapReadyCallback {
-
     private GoogleMap mMap;
     private RequestQueue requestQueue;
     private Location lastKnownLocation;
     private FusedLocationProviderClient fusedLocationClient;
-    public Routes(){}
+    public Routes(){}  // Constructor
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        // Al crear la vista, inflamos el layout correspondiente para que se vea el fragment.
         View view = inflater.inflate(R.layout.fragment_routes, container, false);
 
+        // Instanciamos el request queue.
         requestQueue = Volley.newRequestQueue(getContext());
 
+        // Obtenemos la localización del cliente.
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
+        // Instanciamos el mapa y llamamos a su layout.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) { mapFragment.getMapAsync(this); }
+
         return view;
     }
 
@@ -66,9 +71,9 @@ public class Routes extends Fragment implements OnMapReadyCallback {
 
         // Crear un BitmapDescriptor morado
         BitmapDescriptor purpleIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
-
         BitmapDescriptor orangeIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
 
+        // Añadir marcadores para las playas y los lugares de interés
         LatLng asLapas = new LatLng(43.383636, -8.405864);
         mMap.addMarker(new MarkerOptions().position(asLapas).title("Playa das Lapas").icon(purpleIcon));
 
@@ -101,7 +106,7 @@ public class Routes extends Fragment implements OnMapReadyCallback {
         builder.include(encrucijada);
         LatLngBounds bounds = builder.build();
 
-        int padding = 200; // Puedes ajustar el espacio alrededor de los marcadores
+        int padding = 200; // Ajuste del espacio alrededor de los marcadores
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         mMap.animateCamera(cu);
 
@@ -113,8 +118,10 @@ public class Routes extends Fragment implements OnMapReadyCallback {
             return;
         }
 
-        mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(true);  // Habilitamos la capa de "Mi ubicación" en el mapa.
 
+
+        // Obtenemos la última ubicación conocida del dispositivo:
         fusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(),
                 location -> {
                     if (location != null) {
@@ -123,7 +130,7 @@ public class Routes extends Fragment implements OnMapReadyCallback {
                     }
                 });
 
-
+        // Configuramos el listener para el clic en los marcadores.
         mMap.setOnMarkerClickListener(marker -> {
             LatLng destination = marker.getPosition();
             calculateRoute(lastKnownLocation, destination);
@@ -131,6 +138,8 @@ public class Routes extends Fragment implements OnMapReadyCallback {
         });
     }
 
+
+    // Obtenemos la URL de la API para obtener las direcciones:
     private String getDirectionsUrl(LatLng origin, LatLng destination, String apiKey){
         String str_origin = "origin="+origin.latitude+","+origin.longitude;;
         String str_dest = "destination="+destination.latitude+","+destination.longitude;
@@ -143,11 +152,12 @@ public class Routes extends Fragment implements OnMapReadyCallback {
         return url;
     }
 
+
     private void drawRoute(JSONObject response){
         try{
             Toast.makeText(getContext(), "Dibujando ruta ...", Toast.LENGTH_SHORT).show();
 
-            // Obtiene la ruta principal
+            // Obtenemos la ruta principal.
             JSONObject route = response.getJSONArray("routes").getJSONObject(0);
             JSONObject overviewPolyline = route.getJSONObject("overview_polyline");
             String encodedPath = overviewPolyline.getString("points");
@@ -171,9 +181,13 @@ public class Routes extends Fragment implements OnMapReadyCallback {
         String apiKey = "AIzaSyDepnk_Vlv1_9OT6MM-wPQ9LsqzQ1nKZtI";
         String url = getDirectionsUrl(originLatLng, destination, apiKey);
 
+
+        // Crear una solicitud JSON para obtener la ruta desde la API de Google Maps.
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> drawRoute(response), error -> error.printStackTrace());
 
+
+        // Añadimos la solicitud a la cola de las mismas.
         requestQueue.add(request);
     }
 
