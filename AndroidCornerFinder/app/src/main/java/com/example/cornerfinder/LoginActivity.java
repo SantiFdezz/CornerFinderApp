@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(context, "Authentication failed."+ task.getException().getMessage(),
+                        Toast.makeText(context, "Uno de los campos es inválido. ERROR:"+ task.getException().getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
