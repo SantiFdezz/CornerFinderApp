@@ -5,6 +5,9 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_hotspots">
 
+    <!-- .xml creado para poder navegar entre fragmentos, los cuales recogen los respectivos
+     layouts y ubicaciones de los mismos para poder llamarlos.-->
+
     <fragment
         android:id="@+id/nav_hotspots"
         android:name="com.example.cornerfinder.ui.hotspots.HotspotsFragment"

@@ -7,6 +7,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+
+    <!-- Fragmento para que aparezca el mapa general.-->
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
@@ -15,6 +18,8 @@
         android:layout_height="match_parent"
         tools:context=".MapsActivity" />
 
+
+    <!-- Botón para que aparezca el siguiente. -->
 
     <Button
         android:layout_width="60dp"
@@ -29,6 +34,11 @@
         app:backgroundTint="#ffe599"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <!-- Botón configurado para que aparezca una vez se clica el anterior,
+    sirve para añadir donde nos encontremos actualmente al mapa, osease, que nos llevará
+    al activity correspondiente.-->
 
     <Button
         android:layout_width="wrap_content"
