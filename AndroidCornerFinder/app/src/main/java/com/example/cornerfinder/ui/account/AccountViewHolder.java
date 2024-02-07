@@ -18,7 +18,7 @@ public class AccountViewHolder extends RecyclerView.ViewHolder {
     public AccountViewHolder(@NonNull View ivi){
         super(ivi);
         placeName = ivi.findViewById(R.id.placeName);
-        descripcion = ivi.findViewById(R.id.descripcion);
+        descripcion = ivi.findViewById(R.id.description);
         imageView = ivi.findViewById(R.id.image_view);
     }
 

@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/descripcion"
+        android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Brevedescripciónbrevedescripciónbrevedescripciónbrevedescripciónbrevedescripción"
