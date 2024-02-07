@@ -4,11 +4,17 @@
     import android.os.Bundle;
     import android.view.MenuItem;
 
+    import com.example.cornerfinder.savedplaces.SavedPlacesFragment;
+    import com.google.android.material.navigation.NavigationView;
+
     import com.example.cornerfinder.generalmap.GeneralMapFragment;
     import com.example.cornerfinder.recommended.RecommendedFragment;
+<<<<<<< HEAD
     import com.example.cornerfinder.ui.account.AccountFragment;
+=======
+    import com.example.cornerfinder.routes.Routes;
+>>>>>>> main
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
-    import com.google.android.material.navigation.NavigationView;
     import androidx.activity.OnBackPressedCallback;
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,22 +31,24 @@
         private DrawerLayout drawerLayout;
         private Toolbar toolbar;
 
-
         @Override
         protected void onCreate(Bundle savedInstanceState) {//inicializamos los atributos
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             drawerLayout = findViewById(R.id.drawer_layout);
             toolbar = findViewById(R.id.toolbar);
-
             // Verificar si la actividad se inició con una acción específica
-            if (getIntent().getAction() != null && getIntent().getAction().equals("ACTION_START_ADD_LOCATION")) {
-                // Inflar el fragmento AddlocationFragment
+             if (getIntent().getAction() != null && getIntent().getAction().equals("ACTION_START_ADD_LOCATION")) {
+            // Inflar el fragmento AddlocationFragment
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new AddlocationFragment())
+                    .commit();
+            } else {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new AddlocationFragment())
+                        .replace(R.id.fragment_container, new HotspotsFragment())
                         .commit();
-            }
 
+            }
             //creamos metodo que cierre el menu y no la app
             getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
                 //metodo que cierra el menu si se pulsa atrás.
@@ -73,18 +81,25 @@
                     } else if (item.getItemId() == R.id.nav_recommended) {
                         fragment = new RecommendedFragment();
                     } else if (item.getItemId() == R.id.nav_lugaresguardados) {
-                        fragment = new AddlocationFragment();
+                        fragment = new SavedPlacesFragment();
                     } else if (item.getItemId() == R.id.nav_summermode) {
                         fragment = new SummerModeFragment();
+                    }else if(item.getItemId() == R.id.nav_lugaresguardados){
+                        fragment = new SavedPlacesFragment();
                     } else if (item.getItemId() == R.id.nav_generalmap) {
                         fragment = new GeneralMapFragment();
+                    } else if (item.getItemId() == R.id.nav_routes) {
+                        fragment = new Routes();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {
                         fragment = new EditPreferencesFragment();
                     } else if (item.getItemId() == R.id.nav_account) {
                         fragment = new AccountFragment();
+                    }else if (item.getItemId() == R.id.nav_accountsettings){
+                        fragment = new AccountSettingsFragment();
                     } else if (item.getItemId() == R.id.nav_closesession) {
                         //fragment = new ();
                     }
+
                     //si no llega ningun fragment
                     if (fragment != null) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();

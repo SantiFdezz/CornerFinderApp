@@ -1,6 +1,5 @@
-package com.example.cornerfinder.recommended;
+package com.example.cornerfinder.savedplaces;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cornerfinder.R;
+import com.example.cornerfinder.recommended.RecyclerAdapter;
+import com.example.cornerfinder.recommended.RecyclerItems;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,28 +29,28 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-// Fragmento que muestra recomendaciones
-public class RecommendedFragment extends Fragment {
-    // Variables para la lista de recomendaciones, el adaptador y la cola de solicitudes
+public class SavedPlacesFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
-    private List<RecyclerItems> recommendedList;
-    private RequestQueue requestQueue;
+    private List<RecyclerItems> savedPlacesDataList;
+    private RequestQueue queue;
 
-    // Parámetros para la creación del fragmento
+    private RequestQueue requestQueue;
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    // Constructor vacío requerido
-    public RecommendedFragment() {
+    public SavedPlacesFragment() {
         // Required empty public constructor
     }
 
-    // Método de fábrica para crear una nueva instancia del fragmento
-    public static RecommendedFragment newInstance(String param1, String param2) {
-        RecommendedFragment fragment = new RecommendedFragment();
+    public static SavedPlacesFragment newInstance(String param1, String param2) {
+        SavedPlacesFragment fragment = new SavedPlacesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -57,7 +58,6 @@ public class RecommendedFragment extends Fragment {
         return fragment;
     }
 
-    // Método que se llama al crear el fragmento
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,37 +67,38 @@ public class RecommendedFragment extends Fragment {
         }
     }
 
-    // Método que se llama para crear la vista del fragmento
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflar el layout para este fragmento
         View view = inflater.inflate(R.layout.fragment_recycler, container, false);
-        recommendedList = new ArrayList<>();
-        adapter = new RecyclerAdapter(recommendedList, this);
+
+        queue = Volley.newRequestQueue(getContext());
+
+        savedPlacesDataList = new ArrayList<>();
+        adapter = new RecyclerAdapter(savedPlacesDataList, this);
         recyclerView = view.findViewById(R.id.recycler_view_item);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }
 
-    // Método que se llama después de que la vista del fragmento ha sido creada
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.requestQueue = Volley.newRequestQueue(getContext());
+        RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonArrayRequest request = new JsonArrayRequest
                 (Request.Method.GET,
-                        "https://raw.githubusercontent.com/Bl4nc018/Proyectos-2-trimestre/main/saved_places.json",//Server.name + "/user/flights",
+                        "https://raw.githubusercontent.com/Bl4nc018/Proyectos-2-trimestre/main/saved_places.json",
                         null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
+                                List<RecyclerItems> allTheSavedPlaces = new ArrayList<>();
                                 for(int i=0; i<response.length(); i++) {
                                     try {
-                                        JSONObject r_places = response.getJSONObject(i);
-                                        RecyclerItems place = new RecyclerItems(r_places);
-                                        recommendedList.add(place);
+                                        JSONObject places = response.getJSONObject(i);
+                                        RecyclerItems data = new RecyclerItems(places);
+                                        savedPlacesDataList.add(data);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -112,6 +113,6 @@ public class RecommendedFragment extends Fragment {
                         error.printStackTrace();
                     }
                 });
-        this.requestQueue.add(request);
+        queue.add(request);
     }
 }

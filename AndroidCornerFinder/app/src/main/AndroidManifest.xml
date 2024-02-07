@@ -10,9 +10,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/cornerfinder"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/cornerfinder"
         android:supportsRtl="true"
         android:theme="@style/Theme.CornerFinder"
         tools:targetApi="31">
@@ -30,7 +30,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAqRpSFSxarCZ1Gcb1ur0btB28HB2FY2yQ" />
+            android:value="AIzaSyDepnk_Vlv1_9OT6MM-wPQ9LsqzQ1nKZtI" />
         <activity
             android:name=".MapsActivity"
             android:exported="false"
@@ -45,7 +45,6 @@
             android:theme="@style/Theme.CornerFinder.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
