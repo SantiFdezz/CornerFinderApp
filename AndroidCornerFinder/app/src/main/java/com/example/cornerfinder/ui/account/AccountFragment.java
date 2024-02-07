@@ -50,12 +50,12 @@ public class AccountFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             uid = user.getUid();
-            getUser(uid);
+            getUser(uid, view);
             email = user.getEmail();
         }
-        TextView usernameText = view.findViewById(R.id.text_account);
+
         TextView emailText = view.findViewById(R.id.text_email);
-        usernameText.setText(username);
+
         emailText.setText(email);
         recyclerView = view.findViewById(R.id.account_saved_places_recycler_view);
 
@@ -96,7 +96,7 @@ public class AccountFragment extends Fragment {
         return view;
     }
 
-    private void getUser (String uid){
+    private void getUser (String uid, View view){
         DatabaseReference favRef = FirebaseDatabase.getInstance().getReference("usuarios").child(uid).child("username");
         favRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -105,6 +105,9 @@ public class AccountFragment extends Fragment {
                 if (snapshot.exists()){
                     username = snapshot.getValue(String.class);
                     setUsername(username);
+                    // Se le pasa view y se inicializa aquí porque tarda en ejecutarse y si no, se muestra vacío.
+                    TextView usernameText = view.findViewById(R.id.text_account);
+                    usernameText.setText(username);
                 }
             }
 
