@@ -9,6 +9,7 @@
 
     import com.example.cornerfinder.generalmap.GeneralMapFragment;
     import com.example.cornerfinder.recommended.RecommendedFragment;
+    import com.example.cornerfinder.ui.account.AccountFragment;
     import com.example.cornerfinder.routes.Routes;
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
     import androidx.activity.OnBackPressedCallback;
@@ -88,6 +89,8 @@
                         fragment = new Routes();
                     } else if (item.getItemId() == R.id.nav_edit_preferences) {
                         fragment = new EditPreferencesFragment();
+                    } else if (item.getItemId() == R.id.nav_account) {
+                        fragment = new AccountFragment();
                     }else if (item.getItemId() == R.id.nav_accountsettings){
                         fragment = new AccountSettingsFragment();
                     } else if (item.getItemId() == R.id.nav_closesession) {

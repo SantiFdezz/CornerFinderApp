@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_hotspots">
-
     <!-- .xml creado para poder navegar entre fragmentos, los cuales recogen los respectivos
      layouts y ubicaciones de los mismos para poder llamarlos.-->
 
@@ -42,4 +41,10 @@
         android:id="@+id/nav_routes"
         android:label="Routes"
         tools:layout="@layout/fragment_routes" />
+
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.example.cornerfinder.ui.account.AccountFragment"
+        android:label="@string/menu_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>
