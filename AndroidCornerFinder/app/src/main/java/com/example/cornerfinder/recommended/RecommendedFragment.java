@@ -28,40 +28,26 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RecommendedFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+// Fragmento que muestra recomendaciones
 public class RecommendedFragment extends Fragment {
+    // Variables para la lista de recomendaciones, el adaptador y la cola de solicitudes
     private RecyclerView recyclerView;
-    private RecommendedAdapter adapter;
-    private List<RecommendedItems> recommendedList;
-
+    private RecyclerAdapter adapter;
+    private List<RecyclerItems> recommendedList;
     private RequestQueue requestQueue;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // Parámetros para la creación del fragmento
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    // Constructor vacío requerido
     public RecommendedFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RecommendedFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    // Método de fábrica para crear una nueva instancia del fragmento
     public static RecommendedFragment newInstance(String param1, String param2) {
         RecommendedFragment fragment = new RecommendedFragment();
         Bundle args = new Bundle();
@@ -71,6 +57,7 @@ public class RecommendedFragment extends Fragment {
         return fragment;
     }
 
+    // Método que se llama al crear el fragmento
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,19 +67,21 @@ public class RecommendedFragment extends Fragment {
         }
     }
 
+    // Método que se llama para crear la vista del fragmento
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflar el layout para este fragmento
         View view = inflater.inflate(R.layout.fragment_recycler, container, false);
         recommendedList = new ArrayList<>();
-        adapter = new RecommendedAdapter(recommendedList, (Activity) getContext());
-        recyclerView = view.findViewById(R.id.recyclerView);
+        adapter = new RecyclerAdapter(recommendedList, this);
+        recyclerView = view.findViewById(R.id.recycler_view_item);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }
 
+    // Método que se llama después de que la vista del fragmento ha sido creada
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -104,11 +93,10 @@ public class RecommendedFragment extends Fragment {
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
-                                List<RecommendedItems> flights = new ArrayList<>();
                                 for(int i=0; i<response.length(); i++) {
                                     try {
                                         JSONObject r_places = response.getJSONObject(i);
-                                        RecommendedItems place = new RecommendedItems(r_places);
+                                        RecyclerItems place = new RecyclerItems(r_places);
                                         recommendedList.add(place);
                                     } catch (JSONException e) {
                                         e.printStackTrace();

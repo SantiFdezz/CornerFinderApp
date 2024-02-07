@@ -82,7 +82,8 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Reference UI elements
+
+        // Referencia a los elementos de la UI
         View view = inflater.inflate(R.layout.fragment_addlocation, container, false);
         nameEditText = view.findViewById(R.id.placeName);
         descriptionEditText = view.findViewById(R.id.description);
@@ -96,7 +97,7 @@ public class AddlocationFragment extends Fragment implements OnMapReadyCallback{
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get data from UI elements
+                // Obtiene los datos de los elementos de la UI
                 String name = nameEditText.getText().toString();
                 String description = descriptionEditText.getText().toString();
                 boolean isCheckBox1Checked = checkBox1.isChecked();
