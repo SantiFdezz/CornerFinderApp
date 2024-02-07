@@ -9,11 +9,8 @@
 
     import com.example.cornerfinder.generalmap.GeneralMapFragment;
     import com.example.cornerfinder.recommended.RecommendedFragment;
-<<<<<<< HEAD
     import com.example.cornerfinder.ui.account.AccountFragment;
-=======
     import com.example.cornerfinder.routes.Routes;
->>>>>>> main
     import com.example.cornerfinder.ui.editpreferences.EditPreferencesFragment;
     import androidx.activity.OnBackPressedCallback;
     import androidx.annotation.NonNull;
