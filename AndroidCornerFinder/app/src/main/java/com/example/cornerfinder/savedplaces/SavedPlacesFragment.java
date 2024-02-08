@@ -58,6 +58,7 @@ public class SavedPlacesFragment extends Fragment {
         return fragment;
     }
 
+    // Método llamado al crear el fragmento
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +68,7 @@ public class SavedPlacesFragment extends Fragment {
         }
     }
 
+    // Método llamado al crear la vista del fragmento
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,10 +76,14 @@ public class SavedPlacesFragment extends Fragment {
 
         queue = Volley.newRequestQueue(getContext());
 
+        // Inicializar la lista de datos de lugares guardados
         savedPlacesDataList = new ArrayList<>();
+
+        // Crear un adaptador para el RecyclerView.
         adapter = new RecyclerAdapter(savedPlacesDataList, this);
         recyclerView = view.findViewById(R.id.recycler_view_item);
         recyclerView.setAdapter(adapter);
+        // Establecer un diseño de LinearLayout para el RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }
@@ -86,6 +92,7 @@ public class SavedPlacesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RequestQueue queue = Volley.newRequestQueue(getContext());
+        // Crear una solicitud JSON de matriz para obtener los lugares guardados
         JsonArrayRequest request = new JsonArrayRequest
                 (Request.Method.GET,
                         "https://raw.githubusercontent.com/Bl4nc018/Proyectos-2-trimestre/main/saved_places.json",
@@ -93,16 +100,21 @@ public class SavedPlacesFragment extends Fragment {
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
+                                // Crear una lista para almacenar los datos de lugares guardados
                                 List<RecyclerItems> allTheSavedPlaces = new ArrayList<>();
                                 for(int i=0; i<response.length(); i++) {
                                     try {
+                                        // Obtener un objeto JSON que representa un lugar guardado
                                         JSONObject places = response.getJSONObject(i);
+                                        // Crear un objeto RecyclerItems a partir del objeto JSON
                                         RecyclerItems data = new RecyclerItems(places);
+                                        // Agregar el objeto RecyclerItems a la lista de datos
                                         savedPlacesDataList.add(data);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }
+                                //Notificar al adaptador que se han añadido nuevos datos
                                 adapter.notifyDataSetChanged();
                             }
                         }, new Response.ErrorListener() {
