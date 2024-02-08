@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class LoginActivity extends AppCompatActivity {
+    // Declaración de variables
     private Button registerButton, loginButton, accessButton;
     private EditText textUsername, textPassword;
     private Context context = this;
@@ -22,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Inicialización de los elementos
         mAuth = FirebaseAuth.getInstance();
         accessButton = findViewById(R.id.access_button);
         registerButton = findViewById(R.id.register_page);
@@ -30,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         textPassword = findViewById(R.id.campo_contraseña);
 
 
+        // Hacer que cuando se pulse el botón de registro te lleve a la pantalla de RegisterActivity.
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,16 +45,20 @@ public class LoginActivity extends AppCompatActivity {
         accessButton.setOnClickListener(v -> loginUser());
     }
 
+    // Método para iniciar sesión con correo electrónico y contraseña
     private void loginUser() {
+        // Obtención de los datos
         String email = textUsername.getText().toString().trim();
         String password = textPassword.getText().toString().trim();
+
+        // Iniciar sesión con el método signInWithEmailAndPassword de FirebaseAuth.
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
+                    if (task.isSuccessful()) { // Si el inicio de sesión es exitoso, se inicia la actividad principal y se finaliza la actividad actual
                         Intent intent = new Intent(context, MainActivity.class);
                         startActivity(intent);
                         finish();
-                    } else {
+                    } else { // Si el inicio de sesión falla
                         Toast.makeText(context, "Uno de los campos es inválido. ERROR:"+ task.getException().getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }
