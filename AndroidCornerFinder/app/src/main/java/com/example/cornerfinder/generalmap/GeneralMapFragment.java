@@ -9,10 +9,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.cornerfinder.AddlocationFragment;
 import com.example.cornerfinder.MainActivity;
 import com.example.cornerfinder.R;
 import com.google.android.gms.maps.CameraUpdate;
@@ -45,7 +42,6 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
 
 
         // Definimos los dos botones para el añadido de marcadores a nuestro mapa general.
-
         Button addButton = view.findViewById(R.id.addButton);
         Button addButton2 = view.findViewById(R.id.addButton2);
 
@@ -74,7 +70,6 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
                 startActivity(intent);
             }
         });
-
         return view;
     }
 
@@ -88,6 +83,7 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
         // Creamos un Bitmap para poder cambiar el color de los marcadores.
         BitmapDescriptor purpleIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
         BitmapDescriptor orangeIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
+
 
         // Añadimos los marcadores deseados:
         LatLng yo = new LatLng(43.36700, -8.412600);
@@ -114,6 +110,12 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
         LatLng encrucijada = new LatLng(43.370500, -8.395800);
         mMap.addMarker(new MarkerOptions().position(encrucijada).title("La Encrucijada").icon(orangeIcon));
 
+        LatLng sanPedro = new LatLng(43.368900, -8.402600);
+        mMap.addMarker(new MarkerOptions().position(sanPedro).title("Parque de San Pedro").icon(orangeIcon));
+
+        LatLng galArte = new LatLng(43.369736,-8.399628);
+        mMap.addMarker(new MarkerOptions().position(galArte).title("Galería de arte").icon(orangeIcon));
+
 
         // Para ajustar la cámara del mapa, jugamos con LatLngBounds. Con el builder añadiremos los
         // marcadores deseados al mapa y la clase realizará el ajuste deseado para que aparezcan
@@ -127,10 +129,40 @@ public class GeneralMapFragment extends Fragment implements OnMapReadyCallback {
         builder.include(escondite);
         builder.include(cervantes);
         builder.include(encrucijada);
+        builder.include(sanPedro);
+        builder.include(galArte);
         LatLngBounds bounds = builder.build();
 
         int padding = 200; // Puedes ajustar el espacio de los bordes.
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         mMap.animateCamera(cu);
+
+
+        // A partir de aquí, la clase va a trabajar con los datos de ubicaciones específicas.
+        // Llamamos al bundle con la ubicación y la almacenamos en una variable.
+        Bundle bundle = getArguments();
+
+        if (bundle != null && bundle.containsKey("location")) {
+            String location = bundle.getString("location");
+
+            if (location != null) {
+                // Parsear las coordenadas (supongamos que están separadas por coma)
+                String[] coordinates = location.split(",");
+                if (coordinates.length == 2) {
+                    double latitude = Double.parseDouble(coordinates[0]);
+                    double longitude = Double.parseDouble(coordinates[1]);
+
+                    // Enfocar la cámara del mapa en las coordenadas especificadas
+                    LatLng targetLocation = new LatLng(latitude, longitude);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(targetLocation, 18f));
+                }
+            }
+        }
+
+
+
+
+
+
     }
 }
