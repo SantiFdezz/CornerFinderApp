@@ -1,14 +1,18 @@
 package com.example.cornerfinder.recommended;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cornerfinder.R;
+import com.example.cornerfinder.generalmap.GeneralMapFragment;
 import com.example.cornerfinder.summermode.Util;
 
 // Clase que representa un ViewHolder para el RecyclerView
@@ -42,9 +46,23 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         // Establecer un OnClickListener para el botón de ubicación
         location.setOnClickListener(new View.OnClickListener() {
             @Override
-            // Comprobar que funciona bien el botón locatin y obtiene los datos.
+            // Comprobar que funciona bien el botón location y obtiene los datos.
             public void onClick(View v) {
-                System.out.println("Funciona el botón. Location: "+items.getLocation());
+                // Obtener el FragmentManager desde el contexto de la vista
+                FragmentManager fragmentManager = ((FragmentActivity)itemView.getContext()).getSupportFragmentManager();
+
+                // Crear una instancia del fragmento GeneralMapFragment
+                GeneralMapFragment generalMapFragment = new GeneralMapFragment();
+
+                // Crear un Bundle para pasar datos adicionales al fragmento
+                Bundle bundle = new Bundle();
+                bundle.putString("location", items.getLocation());
+                generalMapFragment.setArguments(bundle);
+
+                // Reemplazar el contenido del contenedor de fragmentos con GeneralMapFragment
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, generalMapFragment)
+                        .addToBackStack(null).commit();
             }
         });
     }
