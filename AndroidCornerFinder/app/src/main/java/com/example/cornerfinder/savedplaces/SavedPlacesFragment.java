@@ -19,7 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cornerfinder.R;
-import com.example.cornerfinder.recommended.RecyclerAdapter;
+import com.example.cornerfinder.savedplaces.SavedPlacesAdapter;
 import com.example.cornerfinder.recommended.RecyclerItems;
 
 import org.json.JSONArray;
@@ -31,7 +31,7 @@ import java.util.List;
 
 public class SavedPlacesFragment extends Fragment {
     private RecyclerView recyclerView;
-    private RecyclerAdapter adapter;
+    private SavedPlacesAdapter adapter;
     private List<RecyclerItems> savedPlacesDataList;
     private RequestQueue queue;
 
@@ -80,7 +80,7 @@ public class SavedPlacesFragment extends Fragment {
         savedPlacesDataList = new ArrayList<>();
 
         // Crear un adaptador para el RecyclerView.
-        adapter = new RecyclerAdapter(savedPlacesDataList, this);
+        adapter = new SavedPlacesAdapter(savedPlacesDataList, this);
         recyclerView = view.findViewById(R.id.recycler_view_item);
         recyclerView.setAdapter(adapter);
         // Establecer un diseño de LinearLayout para el RecyclerView

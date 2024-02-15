@@ -18,20 +18,27 @@ public class EditPreferencesFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        // Creación del ViewModel para este fragmento
         EditPreferencesViewModel editPreferencesViewModel =
                 new ViewModelProvider(this).get(EditPreferencesViewModel.class);
 
+        // Inflar la vista del fragmento usando el binding
         binding = FragmentEditPreferencesBinding.inflate(inflater, container, false);
+        // Obtener la vista raíz del fragmento
         View root = binding.getRoot();
 
         final TextView textView = binding.textEditPreferences;
+        // Observar los cambios en el texto del ViewModel y actualizar el TextView cuando cambie
+
         editPreferencesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
+    // Método que se llama cuando la vista del fragmento está a punto de ser destruida
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        // Limpiar la referencia al binding para evitar fugas de memoria
         binding = null;
     }
 }

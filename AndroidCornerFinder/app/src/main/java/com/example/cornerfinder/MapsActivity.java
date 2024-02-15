@@ -35,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        //Añadimos marker con las coordenadas de coruña aparte de añadirlo a marcadores mueve la camara a la posicion.
         mMap = googleMap;
         LatLng coruña = new LatLng(43.3623, -8.4115);
         mMap.addMarker(new MarkerOptions().position(coruña).title("Marker in coruña"));
