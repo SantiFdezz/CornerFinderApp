@@ -45,16 +45,35 @@ public class RegisterActivity extends AppCompatActivity {
         birthdateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                String month, day;
+                                // si el mes o el dia es menor a 10 se le añade un 0 delante ("05/03/2000")
+                                if (monthOfYear < 10){
+                                    month = "0" + (monthOfYear + 1);
+                                } else {
+                                    month = String.valueOf(monthOfYear + 1);
+                                }
+                                if (dayOfMonth < 10){
+                                    day = "0" + dayOfMonth;
+                                } else {
+                                    day = String.valueOf(dayOfMonth);
+                                }
+                                if (year < 2024) {
+                                    birthdateEditText.setText(year + "-" + month + "-" + day );
+                                } else {
+                                    birthdateEditText.setText("");
+                                }
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        RegisterActivity.this,
-                        dateSetListener,
-                        year, month, day);
-                dialog.show();
             }
         });
 
